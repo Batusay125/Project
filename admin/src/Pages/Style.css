@@ -1,0 +1,53 @@
+.main-div {
+    display: flex;
+}
+.rabbitList,
+.dashboard-div,
+.delivery-div,
+.addRabbit-div {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 85%;
+    padding: 30px;
+}
+
+/* Activity.jsx */
+.activity-div {
+    width: 40%;
+    background-color: red;
+}
+.user-container {
+    display: flex;
+    flex-direction: column;
+}
+.user-container .user {
+    display: flex;
+    gap: 10px;
+    width: auto;
+    height: auto;
+}
+.user-container .user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.user-container .user p {
+    margin-bottom: 8px;
+}
+
+/* RabbitList.jsx */
+.action-btn {
+    margin-right: 8px;
+}
+
+/*  AddRabbit.jsx */
+.addRabbit {
+    align-self: flex-end;
+    margin-bottom: 10px;
+}
+.addRabbit-div .form {
+    width: 50%;
+}
+
+
