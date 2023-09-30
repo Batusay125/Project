@@ -5,24 +5,29 @@ import Sidebar from "../Components/Sidebar";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Header from "../Components/Header.jsx";
+import QRCode from 'react-qr-code';
+
+import appConfig from '../../config.json';
+const BASE_URL = appConfig.apiBasePath; //e.g "http://localhost:8080/api"
 
 function EditRabbit() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [values, setValues] = useState([
-    // name: "ivan",
-    // age: 24,
-    // sex: "",
-    // weight: "",
-  ]);
+  const [values, setValues] = useState([]);
+
+  //QR
+  const [value, setValue] = useState("{name: 'rabbit', age: 1}");
+  const [back, setBack] = useState('#FFFFFF');
+  const [fore, setFore] = useState('#000000');
+  const [size, setSize] = useState(256);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/edit/" + id)
+      .get(BASE_URL + "/edit-rabbit/" + id)
       .then((res) => {
         console.log(res);
-        setValues(res.data[0]);
+        setValues(res.data[0]);    
       })
       .catch((err) => console.log(err));
   }, []);
@@ -34,7 +39,7 @@ function EditRabbit() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:8080/edit/" + id, values)
+      .put(BASE_URL + "/update-rabbit/" + id, values)
       .then((res) => {
         toast.success("Rabbit Updated!");
         navigate("/rabbitlist");
@@ -44,7 +49,6 @@ function EditRabbit() {
 
   return (
     <div className="main-div">
-      {console.log(values)}
       <Sidebar />
       <div className="addRabbit-div">
         <Header />
@@ -91,6 +95,22 @@ function EditRabbit() {
             required
           />
           <br />
+
+          <label htmlFor="">Code :</label>
+          <div className="App">
+            {value && (
+                <QRCode
+                    title="GeeksForGeeks"
+                    value={value}
+                    bgColor={back}
+                    fgColor={fore}
+                    size={size === '' ? 0 : size}
+                />
+            )}
+          </div>
+          <br />
+          <br />
+
           <Link to="/rabbitlist" className="btn btn-secondary m-2">
             Cancel
           </Link>

@@ -6,6 +6,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Header from "../Components/Header.jsx";
 
+import appConfig from '../../config.json';
+const BASE_URL = appConfig.apiBasePath; //e.g "http://localhost:8080/api"
+
 function AddRabbit() {
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -22,7 +25,7 @@ function AddRabbit() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8081/addRabbit", values)
+      .post(BASE_URL + "/add-rabbit", values)
       .then((res) => {
         toast.success("Successfully added!");
         navigate("/rabbitlist");
