@@ -1,0 +1,216 @@
+/* .main-div {
+    width: 100dvw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    overflow-x: hidden;
+} */
+.main-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.home-div,
+.rehome-div,
+.contact-div,
+.about-div {
+    width: 70dvw;
+    height: auto;
+    padding: 40px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    color: #797979;
+    overflow-x: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Home.jsx */
+
+
+.home-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.home-div .rabbit-home {
+    width: 80%;
+}
+
+/* Adopt.jsx */
+
+
+.rehome-div h2 {
+    margin-bottom: 50px;
+}
+.rabbitList {
+    gap: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.btn-toHIde {
+    display: none;
+}
+
+/* Contact.jsx */
+
+
+.contact-div {
+    gap: 20px;
+    
+}
+.contact-div div {
+    margin-bottom: 35px;
+}
+.contact-div h2 {
+    color: #00828c;
+}
+.main-div .rabbit-contact {
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    top: 340px;
+    right: 100px;
+}
+
+/* About.jsx */
+
+.about-div {
+    gap: 20px;
+}
+.about-div h2 {
+    color: #00828c;
+}
+.about-div .content h2 {
+    color: #00828c;
+}
+.about-div .content p {
+    font-size: 20px;
+}
+.main-div .about-div .rabbit-about {
+    width: 300px;
+    height: 450px;
+    position: absolute;
+    right: 150px;
+    top: 290px;
+}
+
+/* Adopt.jsx */
+
+.dataField {
+    margin-bottom: 8px;
+}
+.address {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 8px;
+}
+.address label {
+    grid-column: span 2;
+}
+
+/* RabitData.jsx */
+
+.rabbitData-container {
+    margin: 50px;
+    width: 40dvw;
+    height: auto;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.rabbitDetails {
+    display: flex;
+}
+.rabbitDetails div {
+    width: 40%;
+    margin-right: 50px;
+}
+.rabbitData-container div img {
+    margin-bottom: 20px;
+    width: 50%;
+    height: 50%;
+    border: 2px solid #00828c;
+}
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+/* AdoptForm.jsx */
+
+.adoptForm {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+.adoptForm form {
+    position: relative;
+    width: 40dvw;
+    height: auto;
+    padding: 50px;
+    margin-bottom: 50px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+/* .input-photo {
+    display: none;
+} */
+/* .uploadFile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px dashed #00828c;
+    cursor: pointer;
+} */
+
+
+
+
+
+
+@media (max-width: 480px) {
+    .home-div,
+    .rehome-div,
+    .contact-div,
+    .about-div {
+        gap: 0;
+        width: 100%;
+        padding: 30px 10px 10px 10px;
+    }
+    .contact-div h2 {
+        font-size: 20px;
+    }
+    .contact-div h4 {
+        font-size: 18px;
+    }
+    .main-div .rabbit-contact {
+        display: none;
+    }
+
+    .about-div h2 {
+        font-size: 20px;
+    }
+    .about-div .content h2 {
+        font-size: 20px;
+    }
+    .about-div .content p{
+        font-size: 18px;
+    }
+    .main-div .about-div .rabbit-about {
+        display: none;
+    }
+    
+}
