@@ -5,7 +5,6 @@ const db = require('../config/db');
 
 //PostMapping
 router.post('/add-rabbit', (req, res) => {
-    console.log("add rabitttttttttttt");
     const sql = "INSERT INTO rabbit (`name`, `age`, `sex`, `weight`) VALUES (?)";
       const values = [req.body.name, req.body.age, req.body.sex, req.body.weight];
     
@@ -58,7 +57,6 @@ router.get("/edit-rabbit/:id", (req, res) => {
 
 //PutMapping
 router.put('/update-rabbit/:id', (req, res) => {
-    console.log("update rabbit");
     const sql =
     "UPDATE rabbit SET `name` = ?, `age` = ?, `sex` = ?, `weight` = ? WHERE id = ?";
     const values = [req.body.name, req.body.age, req.body.sex, req.body.weight];

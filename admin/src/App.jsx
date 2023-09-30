@@ -10,6 +10,7 @@ import Register from "./Pages/Register";
 import EditRabbit from "./Pages/EditRabbit.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Chart from "./Pages/Chart";
 
 function App() {
   const router = createBrowserRouter([
@@ -54,7 +55,7 @@ function App() {
       ),
     },
     {
-      path: "/addRabbit",
+      path: "/add-rabbit",
       element: (
         <div>
           <AddRabbit />
@@ -62,7 +63,7 @@ function App() {
       ),
     },
     {
-      path: "/edit/:id",
+      path: "/edit-rabbit/:id",
       element: (
         <div>
           <EditRabbit />
