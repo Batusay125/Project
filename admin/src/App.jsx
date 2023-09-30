@@ -70,6 +70,14 @@ function App() {
         </div>
       ),
     },
+    {
+      path: "/chart",
+      element: (
+        <div>
+          <Chart />
+        </div>
+      ),
+    },
   ]);
   return (
     <div className="App">

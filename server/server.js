@@ -13,31 +13,3 @@ app.use('/api', user);
 
 const rabbit = require('./routes/rabbit');
 app.use('/api', rabbit);
-
-
-// // Add Rabbit
-// app.post("/addRabbit", (req, res) => {
-
-
-// // Edit rabbit
-
-// // app.put("/edit/:id", (req, res) => {
-
-
-// // Delete Rabbit
-// app.delete("/deleterabbit/:id", (req, res) => {
-//   const id = req.params.id;
-//   db.query("DELETE FROM rabbit WHERE rabbit_id = ?", [id], (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     res.json(result);
-//   });
-// });
-
-// // Rabbit List
-// app.get("/rabbitlist", (req, res) => {
-
-
-
-

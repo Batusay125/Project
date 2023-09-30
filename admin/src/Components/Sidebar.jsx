@@ -33,7 +33,7 @@ function Sidebar() {
         <h4>Setting</h4>
         <li>
           <BsBarChartLine className="icons" />
-          <Link to="">Charts</Link>
+          <Link to="/chart">Charts</Link>
         </li>
         <li>
           <GiRabbit className="icons" />
