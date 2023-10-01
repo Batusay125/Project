@@ -1,4 +1,3 @@
-
 import appConfig from '../../config.json';
 const BASE_URL = appConfig.apiBasePath; //e.g "http://localhost:8080/api";
 
