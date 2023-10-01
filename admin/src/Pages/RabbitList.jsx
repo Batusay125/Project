@@ -7,19 +7,22 @@ import { Link } from "react-router-dom";
 import Header from "../Components/Header";
 import { toast } from "react-toastify";
 
-import appConfig from '../../config.json';
+import appConfig from "../../config.json";
 const BASE_URL = appConfig.apiBasePath; //e.g "http://localhost:8080/api"
 
 function RabbitList() {
   const [rabbits, setRabbits] = useState([]);
+  const [record, setRecord] = useState([]);
 
   useEffect(() => {
     axios
-      .get(BASE_URL +"/rabbits")
-      .then((res) => setRabbits(res.data))
+      .get(BASE_URL + "/rabbits")
+      .then((res) => {
+        setRabbits(res.data);
+        setRecord(res.data);
+      })
       .catch((err) => console.log(err));
-      console.log(rabbits);
-
+    console.log(rabbits);
   }, []);
 
   const handleDelete = async (id) => {
@@ -32,6 +35,13 @@ function RabbitList() {
     }
   };
 
+  // Search rabbit filter
+  const Filter = (e) => {
+    setRecord(
+      rabbits.filter((f) => f.name.toLowerCase().includes(e.target.value))
+    );
+  };
+
   return (
     <div className="main-div">
       <Sidebar />
@@ -39,6 +49,14 @@ function RabbitList() {
         <Header />
         <br />
         <h1>Rabbit List</h1>
+        <br />
+        <input
+          type="text"
+          name=""
+          className="form-control"
+          placeholder="Search rabbit by name"
+          onChange={Filter}
+        />
         <br />
         <Link to="/add-rabbit" className="btn btn-primary addRabbit">
           Add Rabbit
@@ -56,7 +74,7 @@ function RabbitList() {
             </tr>
           </thead>
           <tbody>
-            {rabbits.map((data, i) => (
+            {record.map((data, i) => (
               <tr key={i}>
                 <td>{data.id}</td>
                 <td>Img</td>
@@ -65,7 +83,7 @@ function RabbitList() {
                 <td>{data.sex}</td>
                 <td>{data.weight}</td>
                 <td>
-                  <Link 
+                  <Link
                     to={`/edit-rabbit/${data.id}`}
                     className="btn btn-success action-btn"
                   >
