@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from "./Logo.jsx";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { TbTruckDelivery } from "react-icons/tb";
@@ -10,8 +10,23 @@ import { GiRabbit } from "react-icons/gi";
 import { TiContacts } from "react-icons/ti";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { RiLogoutCircleLine } from "react-icons/ri";
+import * as UserController from '../controller/UserController.jsx'
+import { AuthContext } from "../App";
+import { useContext } from "react";
+
+
+
+
 
 function Sidebar() {
+  const [signIn, setSignIn] = useContext(AuthContext);
+  const navigateTo = useNavigate()
+
+  function onLogout() {
+    setSignIn(null);
+    navigateTo("/");
+  }
+
   return (
     <div className="sidebar">
       <Logo />
@@ -49,9 +64,10 @@ function Sidebar() {
         </li>
         <li>
           <RiLogoutCircleLine className="icons" />
-          <Link to="" className="logout">
+          {/* <Link to="/" className="logout">
             Logout
-          </Link>
+          </Link> */}
+          <button onClick={onLogout} className="logout">Logout</button>
         </li>
       </ul>
     </div>
