@@ -11,7 +11,9 @@ import { AuthContext } from "../App.jsx";
 
 function Dashboard() {
   
-  const signIn = useContext(AuthContext);
+  // const signIn = useContext(AuthContext);
+  const [signIn, setSignIn] = useContext(AuthContext);
+  console.log(signIn);
 
   return (
    
@@ -22,7 +24,7 @@ function Dashboard() {
         <Header />
         <br />
         <h1>Dashboard</h1>
-        <h1>Welcome {signIn[0] != null ? signIn[0].name : ""}</h1>
+        <h1>Welcome {signIn != null ? signIn.name : ""}</h1>
         <div>{/* <Activity /> */}</div>
       </div>
     </div>
