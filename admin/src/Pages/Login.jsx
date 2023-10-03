@@ -117,7 +117,7 @@ function Login() {
                         </button>
 
                         <span className="forgetPassword">
-                            Forgat your password? <a href="">Click</a>
+                            Forgat your password? <a href={'/createPass'}>Click</a>
 
                         </span>
 
