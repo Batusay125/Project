@@ -1,4 +1,4 @@
-import { createContext, useState, useMemo, useEffect, useReducer } from "react";
+import { createContext, useState, useMemo, useEffect, useReducer, useContext } from "react";
 import "./App.css";
 import { BrowserRouter, createBrowserRouter, Route, RouterProvider, Routes, useNavigate } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
@@ -11,15 +11,11 @@ import EditRabbit from "./Pages/EditRabbit.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Chart from "./Pages/Chart";
-export const AuthContext = createContext();
-import * as UserController from './controller/UserController'
-
+export const AuthContext = createContext(null);
+import SecureStore from "react-secure-storage";
 
 function App() {
-
-  const [signIn, setSignIn] = useState(null);
-
-  console.log(signIn);
+  const signIn = useContext(AuthContext);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -87,26 +83,24 @@ function App() {
     }
   ]);
 
+  //state is not final where to use.
   const [state, dispatch] = useReducer((prevState, action) => {
-    console.log("appppp use reducer");
     switch (action.type) {
       case "RESTORE_TOKEN":
-        console.log("RESTORE_TOKEN----");
-        setSignIn({name: "name of the user", age: 19});
+        console.log("----RESTORE_TOKEN----");
+        return {
+          ...prevState,
+          userToken: action.token
+        };
+      case "SIGN_IN":
+        console.log("----SIGN_IN----");
         return {
           ...prevState,
           isSignOut: false,
           userToken: action.token
         };
-      case "SIGN_IN":
-        console.log("SIGN_IN----");
-        return {
-          ...prevState,
-          isSignOut: false,
-          userToken: null
-        };
       case "SIGN_OUT":
-        console.log("SIGN_OUT----");
+        console.log("----SIGN_OUT----");
         return {
           ...prevState,
           isSignOut: true,
@@ -118,48 +112,45 @@ function App() {
     userToken: null
   }
   );
-  useMemo(
+
+  const authContext = useMemo(
     () => ({
       signIn: (data) => {
-        console.log("signIn user");
-        dispatch({ type: "SIGN_IN", token: data.token })
+        SecureStore.setItem("userToken", data);
+        dispatch({ type: "SIGN_IN", token: data })
       },
       signOut: () => {
-        console.log("signoutttttt");
-        // UserController.clear();
+        SecureStore.clear();
         dispatch({ type: "SIGN_OUT" })
       }
     }), []);
 
   useEffect(() => {
-    console.log("appppp use effect");
-    let userToken = {name: "current signin user", age: 23};
-    // let userToken = SecureStore.get("userToken"); kung saan naka save yung current signin user, mga ganto dapat approach.
-    dispatch({ type: "RESTORE_TOKEN", token: userToken });
+    console.log("---------START APP USE EFFECT---------");
+    let userToken = SecureStore.getItem("userToken");
+    dispatch({ type: "RESTORE_TOKEN", token: userToken }); 
+    console.log("---------END APP USE EFFECT---------");
   }, []);
 
   return (
-    <AuthContext.Provider value={[signIn, setSignIn]}>
+    // <AuthContext.Provider value={authContext}>
+    //   <div className="App">
+    //     <BrowserRouter>
+    //       <header>
+    //         <Routes>
+    //           {state.isSignOut ? (
+    //             <Route path= "/dashboard" element={<Dashboard/>}/>
+    //           ) : (
+    //             <Route path= "/" element={<Login/>}/>
+    //           )}
+    //         </Routes>
+    //       </header>
+    //     </BrowserRouter>
+    //   </div>
+    // </AuthContext.Provider>
+
+    <AuthContext.Provider value={authContext}>
       <div className="App">
-        
-        {/* <BrowserRouter>
-          <header>
-            <Routes>
-           
-              {state.isSignOut ? (
-              <Route path= "/" element={<Login/>}/>
-              ) : (
-                
-                <Route path= "/dashboard" element={<Dashboard/>}/>
-              )}
-
-              <Route path="/" element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-
-            </Routes>
-          </header>
-        </BrowserRouter> */}
-
         <ToastContainer
           position="top-center"
           autoClose={2500}
@@ -175,6 +166,7 @@ function App() {
         <RouterProvider router={router} />
       </div>
     </AuthContext.Provider>
+
   );
 }
 

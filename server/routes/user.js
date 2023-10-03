@@ -14,7 +14,11 @@ router.get('/users', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  db.query("SELECT * FROM user where id = 1", (err, results) => {
+  console.log(req.body);
+  const username = req.body.LoginUserName;
+  const password = req.body.LoginPassowrd;
+  const values = [req.body.LoginUserName, req.body.LoginPassowrd];
+  db.query("SELECT * FROM user where username = ?", [username, password],  (err, results) => {
     if (err) {
       return err;
     }

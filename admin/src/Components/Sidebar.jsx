@@ -10,20 +10,16 @@ import { GiRabbit } from "react-icons/gi";
 import { TiContacts } from "react-icons/ti";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import * as UserController from '../controller/UserController.jsx'
 import { AuthContext } from "../App";
 import { useContext } from "react";
 
 
-
-
-
 function Sidebar() {
-  const [signIn, setSignIn] = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
   const navigateTo = useNavigate()
 
   function onLogout() {
-    setSignIn(null);
+    authContext.signOut();
     navigateTo("/");
   }
 
