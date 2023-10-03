@@ -5,9 +5,10 @@ import Sidebar from "../Components/Sidebar";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Header from "../Components/Header.jsx";
-import QRCode from 'react-qr-code';
+import QRCode from "react-qr-code";
 
-import appConfig from '../../config.json';
+import appConfig from "../../config.json";
+import { Form } from "react-bootstrap";
 const BASE_URL = appConfig.apiBasePath; //e.g "http://localhost:8080/api"
 
 function EditRabbit() {
@@ -18,8 +19,8 @@ function EditRabbit() {
 
   //QR
   const [value, setValue] = useState("{name: 'rabbit', age: 1}");
-  const [back, setBack] = useState('#FFFFFF');
-  const [fore, setFore] = useState('#000000');
+  const [back, setBack] = useState("#FFFFFF");
+  const [fore, setFore] = useState("#000000");
   const [size, setSize] = useState(256);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ function EditRabbit() {
       .get(BASE_URL + "/edit-rabbit/" + id)
       .then((res) => {
         console.log(res);
-        setValues(res.data[0]);    
+        setValues(res.data[0]);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -76,14 +77,18 @@ function EditRabbit() {
           />
           <br />
           <label htmlFor="">Sex :</label>
-          <input
-            type="text"
-            name="sex"
-            value={values.sex}
-            className="form-control"
+          <Form.Select
+            aria-label="Default select example"
             onChange={handleInput}
+            name="sex"
             required
-          />
+          >
+            <option value="" hidden>
+              {values.sex}
+            </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </Form.Select>
           <br />
           <label htmlFor="">Weight (klg/s) :</label>
           <input
@@ -99,13 +104,13 @@ function EditRabbit() {
           <label htmlFor="">Code :</label>
           <div className="App">
             {value && (
-                <QRCode
-                    title="GeeksForGeeks"
-                    value={value}
-                    bgColor={back}
-                    fgColor={fore}
-                    size={size === '' ? 0 : size}
-                />
+              <QRCode
+                title="GeeksForGeeks"
+                value={`Name: ${values.name} Age: ${values.age} Sex: ${values.sex} Weight: ${values.weight}`}
+                bgColor={back}
+                fgColor={fore}
+                size={size === "" ? 0 : size}
+              />
             )}
           </div>
           <br />

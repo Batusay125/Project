@@ -4,9 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../Components/Sidebar";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Form } from "react-bootstrap";
 import Header from "../Components/Header.jsx";
 
-import appConfig from '../../config.json';
+import appConfig from "../../config.json";
 const BASE_URL = appConfig.apiBasePath; //e.g "http://localhost:8080/api"
 
 function AddRabbit() {
@@ -59,14 +60,19 @@ function AddRabbit() {
             required
           />
           <br />
-          <label htmlFor="">Sex :</label>
-          <input
-            type="text"
-            name="sex"
-            className="form-control"
+          <label htmlFor="sex">Sex :</label>
+          <Form.Select
+            aria-label="Default select example"
             onChange={handleInput}
+            name="sex"
             required
-          />
+          >
+            <option value="" hidden>
+              Select
+            </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </Form.Select>
           <br />
           <label htmlFor="">Weight (klg/s) :</label>
           <input
