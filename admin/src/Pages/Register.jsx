@@ -1,124 +1,116 @@
-import React, {useState} from "react"
-import './login.css'
-import { Link,  useNavigate } from 'react-router-dom'
-import Axios from 'axios'
+import React, { useState } from "react";
+import "./login.css";
+import { Link, useNavigate } from "react-router-dom";
+import Axios from "axios";
 
 // assets of motherfucker
 
-import video from './LoginAsset/video.mp4'
-import rabbit from './LoginAsset/rabbit.png'
-import {FaUserShield} from 'react-icons/fa'
-import {BsFillShieldLockFill} from 'react-icons/bs'
-import {AiOutlineSwapRight} from 'react-icons/ai'
-import {MdOutlineAlternateEmail} from 'react-icons/md'
+import rabbit from "./LoginAsset/rabbit.png";
+import { FaUserShield } from "react-icons/fa";
+import { BsFillShieldLockFill } from "react-icons/bs";
+import { AiOutlineSwapRight } from "react-icons/ai";
+import { MdOutlineAlternateEmail } from "react-icons/md";
 
 const Register = () => {
+  //holds the input
+  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
-   
-    //holds the input
-    const [email, setEmail] = useState('')
-    const [userName, setUserName] = useState('')
-    const [password, setPassword] = useState('')
+  const navigateTo = useNavigate();
 
-    const navigateTo = useNavigate()
+  //onclick mf
+  const createUser = (e) => {
+    e.preventDefault();
 
-    //onclick mf
-    const createUser = (e)=>{
+    Axios.post("http://localhost:3002/register", {
+      Email: email,
+      UserName: userName,
+      Password: password,
+    }).then(() => {
+      //register page to login page
+      navigateTo("/");
 
-        e.preventDefault()
+      //clear the fields
+      setEmail("");
+      setUserName("");
+    });
+  };
 
-        Axios.post('http://localhost:3002/register', {
-
-            Email: email,
-            UserName: userName,
-            Password: password
-
-        }).then(()=>{
-            //register page to login page
-            navigateTo('/')
-
-            //clear the fields
-            setEmail('')
-            setUserName('')
-        })
-    }
-
-
-    return(
-        <div className='registerPage flex'>
-        <div className="container flex">
-
-             <div className="videoDiv">
-            <video src={video} autoPlay muted loop></video>
-
-            <div className="textDiv">
-                <h2 className='title'>Rehoming Process for rabbit</h2>
-                <p>Adopt rabbit now!!</p>
-            </div>
-
-            <div className="footerDiv flex">
-                <span className="text">Have an account</span>
-                <Link to={'/'}>
-                <button className='btn'>Login</button>
-                </Link>
-            </div>
-    </div> 
-
-            <div className="formDiv flex">
-                <div className="headerDiv">
-                    <img src={rabbit} alt="Logo Image" />
-                    <h3>Let Us Know Who You!</h3>
-                </div>
-
-                <form action="" className='form grid'>
-                    
-
-                    <div className="inputDiv">
-                        <label htmlFor="email">Email</label>
-                        <div className="input flex">
-                            <MdOutlineAlternateEmail className='icon'/>
-                            <input type="email" id='email' placeholder='Enter Email' onChange={(event) => {
-                                setEmail(event.target.value)
-                            }}/>
-                        </div>
-                    </div>
-
-                    <div className="inputDiv">
-                        <label htmlFor="username">Username</label>
-                        <div className="input flex">
-                            <FaUserShield className='icon'/>
-                            <input type="text" id='username' placeholder='Enter Name' onChange={(event) => {
-                                setUserName(event.target.value)
-                            }}/>
-                        </div>
-                    </div>
-                    <div className="inputDiv">
-                        <label htmlFor="password">Password</label>
-                        <div className="input flex">
-                            <BsFillShieldLockFill className='icon'/>
-                            <input type="password" id='password' placeholder='Enter Password' onChange={(event) => {
-                                setPassword(event.target.value)
-                            }}/>
-                        </div>
-                    </div>
-
-                    <button type='submit' className='btn flex' onClick={createUser}>
-                        <span> 
-                            Register 
-                            </span>
-                        <AiOutlineSwapRight className='icon'/>
-                    </button>
-
-                    <span className="forgetPassword">
-                        Forgat your password? <a href={'/createPass'}>Click</a>
-                    </span>
-
-                </form>
-            </div>
-
+  return (
+    <div className="loginPage flex">
+      <div className="container flex">
+        <div className="welcome-div">
+          <h2>
+            <span className="welcome-span">Welcome back to</span>
+            <br />
+            E-LEPORIDAE
+          </h2>
         </div>
-        </div>
-    )
-}
+        <form className="form grid">
+          <h2 className="login-title">Administrator</h2>
+          <div className="inputDiv">
+            <label htmlFor="username">Name</label>
+            <div className="input flex">
+              <FaUserShield className="icons" />
+              <input
+                type="text"
+                id="username"
+                placeholder="Enter your name"
+                onChange={(event) => {
+                  setUserName(event.target.value);
+                }}
+              />
+            </div>
+          </div>
+          <div className="inputDiv">
+            <label htmlFor="email">Email</label>
+            <div className="input flex">
+              <MdOutlineAlternateEmail className="icons" />
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+              />
+            </div>
+          </div>
 
-export default Register
+          <div className="inputDiv">
+            <label htmlFor="password">Password</label>
+            <div className="input flex">
+              <BsFillShieldLockFill className="icons" />
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="btn register-btn flex"
+            onClick={createUser}
+          >
+            <span>Sign up</span>
+            <AiOutlineSwapRight className="icon" />
+          </button>
+          <div>
+            Already have an account? <Link to="/">Login</Link>
+          </div>
+          <div>
+            <Link>Sign up as guest</Link>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Register;
