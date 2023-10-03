@@ -67,7 +67,7 @@ const Register = () => {
             <div className="formDiv flex">
                 <div className="headerDiv">
                     <img src={rabbit} alt="Logo Image" />
-                    <h3>Let Us Know Who the Fuck You Are!</h3>
+                    <h3>Let Us Know Who You!</h3>
                 </div>
 
                 <form action="" className='form grid'>
@@ -110,7 +110,7 @@ const Register = () => {
                     </button>
 
                     <span className="forgetPassword">
-                        Forgat your password? <a href="">Click</a>
+                        Forgat your password? <a href={'/createPass'}>Click</a>
                     </span>
 
                 </form>

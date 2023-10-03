@@ -11,8 +11,12 @@ import EditRabbit from "./Pages/EditRabbit.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Chart from "./Pages/Chart";
+
 export const AuthContext = createContext(null);
 import SecureStore from "react-secure-storage";
+
+import CreateNewPass from "./Pages/CreateNewPass";
+
 
 function App() {
   const signIn = useContext(AuthContext);
@@ -33,6 +37,15 @@ function App() {
         </div>
       ),
     },
+    {
+      path: "/createPass",
+      element: (
+        <div>
+          <CreateNewPass />
+        </div>
+      ),
+    },
+
     {
       path: "/dashboard",
       element: (
