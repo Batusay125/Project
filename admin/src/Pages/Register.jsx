@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
-
-// assets of motherfucker
-
-import rabbit from "./LoginAsset/rabbit.png";
 import { FaUserShield } from "react-icons/fa";
 import { BsFillShieldLockFill } from "react-icons/bs";
 import { AiOutlineSwapRight } from "react-icons/ai";
@@ -56,6 +52,7 @@ const Register = () => {
               <input
                 type="text"
                 id="username"
+                autoComplete="on"
                 placeholder="Enter your name"
                 onChange={(event) => {
                   setUserName(event.target.value);
@@ -70,6 +67,7 @@ const Register = () => {
               <input
                 type="email"
                 id="email"
+                autoComplete="on"
                 placeholder="Enter your email"
                 onChange={(event) => {
                   setEmail(event.target.value);
@@ -85,6 +83,7 @@ const Register = () => {
               <input
                 type="password"
                 id="password"
+                autoComplete="on"
                 placeholder="Enter your password"
                 onChange={(event) => {
                   setPassword(event.target.value);

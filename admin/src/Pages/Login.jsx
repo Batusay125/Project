@@ -1,10 +1,6 @@
 import React, { useEffect, useState, useContext, createContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
-
-// import video from "./LoginAsset/video.mp4";
-import rabbit from "./LoginAsset/rabbit.png";
-
 import { FaUserShield } from "react-icons/fa";
 import { BsFillShieldLockFill } from "react-icons/bs";
 import { AiOutlineSwapRight } from "react-icons/ai";
@@ -75,7 +71,9 @@ function Login() {
               <input
                 type="text"
                 id="username"
+                name="username"
                 placeholder="Enter your email"
+                autoComplete="on"
                 onChange={(event) => {
                   setLoginUserName(event.target.value);
                 }}
@@ -89,6 +87,8 @@ function Login() {
               <input
                 type="password"
                 id="password"
+                name="password"
+                autoComplete="on"
                 placeholder="Enter your password"
                 onChange={(event) => {
                   setLoginPassword(event.target.value);

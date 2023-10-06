@@ -1,10 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 90%;
+}
 .main-div {
     display: flex;
 }
 .rabbitList,
 .dashboard-div,
 .delivery-div,
-.addRabbit-div {
+.addRabbit-div,
+.breeding-div,
+.breed-data-div, 
+.breed-pair-div,
+.edit-breed-div,
+.message-div {
     position: absolute;
     right: 0;
     top: 0;
@@ -40,6 +53,9 @@
 .action-btn {
     margin-right: 8px;
 }
+.search-filter-div {
+    width: 30%;
+}
 
 /*  AddRabbit.jsx */
 .addRabbit {
@@ -47,7 +63,52 @@
     margin-bottom: 10px;
 }
 .addRabbit-div .form {
-    width: 50%;
+    width: 30%;
 }
 
+/* Breeding.jsx */
+.breed-btn {
+    margin-bottom: 20px;
+}
+.view {
+    color: #fff;
+}
 
+/* AddBreedPair.jsx */
+.breed-ground {
+    display: flex;
+    width: 100%;
+    gap: 50px;
+}
+.breed-ground .ground span {
+    align-self: center;
+}
+.ground {
+    width: 50%;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.center-ground {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+.cancel {
+    margin-top: 50px;
+    margin-right: 20px;
+}
+.pair {
+    margin-top: 50px;
+}
+
+/* Breeding Data.jsx */
+.breed-data {
+    display: flex;
+    width: 100%;
+}
+.breed-data>div {
+    width: 20%;
+}

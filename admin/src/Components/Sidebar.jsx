@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import "./Sidebar.css";
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "./Logo.jsx";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { TbTruckDelivery } from "react-icons/tb";
 import { BsListCheck } from "react-icons/bs";
 import { BsBarChartLine } from "react-icons/bs";
 import { GiRabbit } from "react-icons/gi";
-import { TiContacts } from "react-icons/ti";
-import { FaRegMoneyBillAlt } from "react-icons/fa";
+import { TiMessages } from "react-icons/ti";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { AuthContext } from "../App";
 import { useContext } from "react";
 
-
 function Sidebar() {
   const authContext = useContext(AuthContext);
-  const navigateTo = useNavigate()
+  const navigateTo = useNavigate();
 
   function onLogout() {
     authContext.signOut();
@@ -48,22 +46,20 @@ function Sidebar() {
         </li>
         <li>
           <GiRabbit className="icons" />
-          <Link to="">Breed</Link>
+          <Link to="/breeding">Breeding</Link>
         </li>
         <li>
-          <TiContacts className="icons" />
-          <Link to="">Contact</Link>
-        </li>
-        <li>
-          <FaRegMoneyBillAlt className="icons" />
-          <Link to="">Billing</Link>
+          <TiMessages className="icons" />
+          <Link to="/messages">Messages</Link>
         </li>
         <li>
           <RiLogoutCircleLine className="icons" />
           {/* <Link to="/" className="logout">
             Logout
           </Link> */}
-          <button onClick={onLogout} className="logout">Logout</button>
+          <button onClick={onLogout} className="logout">
+            Logout
+          </button>
         </li>
       </ul>
     </div>

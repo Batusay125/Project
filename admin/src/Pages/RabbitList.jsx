@@ -6,6 +6,9 @@ import Sidebar from "../Components/Sidebar";
 import { Link } from "react-router-dom";
 import Header from "../Components/Header";
 import { toast } from "react-toastify";
+import { FiEdit } from "react-icons/fi";
+import { BsSend } from "react-icons/bs";
+import { RiDeleteBin7Line } from "react-icons/ri";
 
 import appConfig from "../../config.json";
 const BASE_URL = appConfig.apiBasePath; //e.g "http://localhost:8080/api"
@@ -50,13 +53,15 @@ function RabbitList() {
         <br />
         <h1>Rabbit List</h1>
         <br />
-        <input
-          type="text"
-          name=""
-          className="form-control"
-          placeholder="Search rabbit by name"
-          onChange={Filter}
-        />
+        <div className="search-filter-div">
+          <input
+            type="text"
+            name=""
+            className="form-control"
+            placeholder="Search rabbit by name"
+            onChange={Filter}
+          />
+        </div>
         <br />
         <Link to="/add-rabbit" className="btn btn-primary addRabbit">
           Add Rabbit
@@ -87,14 +92,16 @@ function RabbitList() {
                     to={`/edit-rabbit/${data.id}`}
                     className="btn btn-success action-btn"
                   >
-                    Edit
+                    <FiEdit />
                   </Link>
-                  <button className="btn btn-primary action-btn">Rehome</button>
+                  <button className="btn btn-primary action-btn">
+                    <BsSend />
+                  </button>
                   <button
                     className="btn btn-danger action-btn"
                     onClick={(e) => handleDelete(data.id)}
                   >
-                    Delete
+                    <RiDeleteBin7Line />
                   </button>
                 </td>
               </tr>
