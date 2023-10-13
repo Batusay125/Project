@@ -21,17 +21,15 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8081/", values)
+      .post("http://localhost:8081/api/login-client", values)
       .then((res) => {
-        if (res.data.token) {
+        if (res.data) {
           // Assuming the server responds with a 'token' field upon successful login
-          const token = res.data.token;
-
+          // const token = res.data.token;
           // Store the JWT token securely (e.g., in localStorage)
-          localStorage.setItem("token", token);
-
+          localStorage.setItem("token", "dfgsdg");
           toast.success("Login successfully");
-          navigate("/adopt");
+          navigate("/home");
         } else {
           toast.error("Incorrect Email or Password");
         }

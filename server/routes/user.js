@@ -1,8 +1,8 @@
-const express = require('express')
+const express = require("express");
 const router = express.Router();
-const db = require('../config/db');
+const db = require("../config/db");
 
-router.get('/users', (req, res) => {
+router.get("/users", (req, res) => {
   db.query("SELECT * FROM user", (err, results) => {
     if (err) {
       console.error("Error fetching :", err);
@@ -13,17 +13,21 @@ router.get('/users', (req, res) => {
   });
 });
 
-router.post('/login', (req, res) => {
+router.post("/login", (req, res) => {
   console.log(req.body);
-  const username = req.body.LoginUserName;
+  const email = req.body.LoginUserName;
   const password = req.body.LoginPassowrd;
   const values = [req.body.LoginUserName, req.body.LoginPassowrd];
-  db.query("SELECT * FROM user where username = ?", [username, password],  (err, results) => {
-    if (err) {
-      return err;
+  db.query(
+    "SELECT * FROM user where email = ? AND password = ?",
+    [email, password],
+    (err, results) => {
+      if (err) {
+        return err;
+      }
+      return res.json(results);
     }
-    return res.json(results);
-  });
+  );
 });
 
 module.exports = router;

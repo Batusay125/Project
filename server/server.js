@@ -4,7 +4,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-app.listen(8080, () => {
+app.listen(8081, () => {
   console.log("Server is running on port 8080");
 });
 
@@ -19,3 +19,6 @@ app.use("/api", adoption);
 
 const breeding = require("./routes/breeding");
 app.use("/api", breeding);
+
+const client = require("./routes/client");
+app.use("/api", client);
