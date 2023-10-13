@@ -8,23 +8,22 @@ import { ImProfile } from "react-icons/im";
 
 function DropdownMenu() {
   const navigate = useState();
-  const handleLogout = (e) => {
-    // localStorage.removeItem("token");
-    e.preventDefault();
-    navigate("/");
+
+  const handleLogout = () => {
+    // Remove the JWT token from localStorage
+    localStorage.removeItem("token");
+    toast.success("Logged out successfully");
+    // Redirect to the login page or any other desired route
+    navigate("/login");
   };
   return (
     <div className="dropdown">
       <ul className="">
-        <Link to="">
-          <ImProfile className="icon icons" />
-          Profile
-        </Link>
         <Link to="/myapplication">
           <AiOutlineForm className="icon icons" />
           My application
         </Link>
-        <Link to="/">
+        <Link to="/" onClick={handleLogout}>
           <BiLogOut className="icon icons" />
           Logout
         </Link>

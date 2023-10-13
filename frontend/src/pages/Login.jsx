@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginSignup.css";
 import Validation from "./LoginValidation.jsx";
-import Email from "../icons/email.png";
-import Password from "../icons/password.png";
+import { AiOutlineMail } from "react-icons/ai";
+import { RiLockPasswordLine } from "react-icons/ri";
 import axios from "axios";
 import { toast } from "react-toastify";
-import LoginRabbit from "../images/LoginRabbit.jpg";
+
 function Login() {
   const [values, setValues] = useState({
     email: "",
@@ -15,64 +15,78 @@ function Login() {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const handleInput = (e) => {
-    setValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(Validation(values));
-    if (errors.email === "" && errors.password === "") {
-      axios
-        .post("http://localhost:8081/", values)
-        .then((res) => {
-          if (res.data === "Success") {
-            toast.success("Login successfully");
-            navigate("/adopt");
-          } else {
-            toast.error("Incorrect Email or Password");
-          }
-        })
-        .catch((err) => console.log(err));
-    }
+    axios
+      .post("http://localhost:8081/", values)
+      .then((res) => {
+        if (res.data.token) {
+          // Assuming the server responds with a 'token' field upon successful login
+          const token = res.data.token;
+
+          // Store the JWT token securely (e.g., in localStorage)
+          localStorage.setItem("token", token);
+
+          toast.success("Login successfully");
+          navigate("/adopt");
+        } else {
+          toast.error("Incorrect Email or Password");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("An error occurred during login");
+      });
   };
 
   return (
     <div className="LoginSignup-div">
-      <div className="bg-image "></div>
-      <form className="form-container" onSubmit={handleSubmit}>
-        <h4 className="text">
-          Welcome back <br /> to e-Leporidae
-        </h4>
-        <div className="inputs">
-          <div className="input">
-            <img src={Email} alt="" />
-            <input
-              type="text"
-              name="email"
-              onChange={handleInput}
-              placeholder="Email"
-            />
+      <div className="bg-image"></div>
+      <div className="main-container">
+        <div className="title-div">
+          <h4 className="text">Welcome back!</h4>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="inputs">
+            <div className="input">
+              <AiOutlineMail className="icons" />
+              <input
+                type="text"
+                name="email"
+                value={values.email}
+                onChange={handleInput}
+                placeholder="Email"
+                required
+              />
+              {errors.email && <p className="error">{errors.email}</p>}
+            </div>
+            <div className="input">
+              <RiLockPasswordLine className="icons" />
+              <input
+                type="password"
+                name="password"
+                value={values.password}
+                onChange={handleInput}
+                placeholder="Password"
+                required
+              />
+              {errors.password && <p className="error">{errors.password}</p>}
+            </div>
           </div>
-          <div className="input">
-            <img src={Password} alt="" />
-            <input
-              type="password"
-              name="password"
-              onChange={handleInput}
-              placeholder="Password"
-            />
+          <button type="submit" className="submit login-btn">
+            Login
+          </button>
+          <div className="forgot-password">
+            Forgot password? <Link>Reset password</Link>
           </div>
-        </div>
-        <div className="forgot-password">
-          Forgot password? <Link>Reset password</Link>
-        </div>
-        <div className="signup-link">
-          Don't have an account? <Link to="/signup">Sign up here</Link>
-        </div>
-        <button type="submit" className="submit login-btn">
-          Login
-        </button>
-      </form>
+          <div className="signup-link">
+            Don't have an account? <Link to="/signup">Create one</Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

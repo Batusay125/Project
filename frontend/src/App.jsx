@@ -11,6 +11,8 @@ import { ToastContainer } from "react-toastify";
 import AdoptForm from "./pages/AdoptForm.jsx";
 import RabbitData from "./pages/RabbitData.jsx";
 import AddRabbit from "./pages/AddRabbit.jsx";
+import AboutRabbit from "./pages/AboutRabbit.jsx";
+import NewForm from "./pages/NewForm.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -71,10 +73,18 @@ function App() {
       ),
     },
     {
-      path: "/form",
+      path: "/rabbitdata/:name/:id/adopt-form",
       element: (
         <div>
           <AdoptForm />
+        </div>
+      ),
+    },
+    {
+      path: "/newform",
+      element: (
+        <div>
+          <NewForm />
         </div>
       ),
     },
@@ -94,11 +104,19 @@ function App() {
         </div>
       ),
     },
+    {
+      path: "/adopt/:id",
+      element: (
+        <div>
+          <AboutRabbit />
+        </div>
+      ),
+    },
   ]);
   return (
     <div className="app">
       <ToastContainer
-        position="bottom-left"
+        position="top-center"
         autoClose={2000}
         hideProgressBar
         newestOnTop={false}

@@ -44,11 +44,11 @@ function Request() {
                 <td>
                   {data.barangay}, {data.city}
                 </td>
-                <td>10-10-10</td>
+                <td>{data.adoption_date}</td>
                 <td>{data.reason_for_adoption}</td>
                 <td className="actions">
                   <button className="secondary">Review</button>
-                  <button className="success">Approved</button>
+                  <button className="success">Approve</button>
                   <button className="danger">Decline</button>
                 </td>
               </tr>

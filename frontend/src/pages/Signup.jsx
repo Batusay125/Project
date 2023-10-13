@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginSignup.css";
 import Validation from "./SignupValidation.jsx";
-import Person from "../icons/Person.png";
-import Email from "../icons/email.png";
-import Password from "../icons/password.png";
+import { HiOutlineUser } from "react-icons/hi";
+import { AiOutlineMail } from "react-icons/ai";
+import { RiLockPasswordLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 import axios from "axios";
-import LoginRabbit from "../images/LoginRabbit.jpg";
 
 function Login() {
   const [values, setValues] = useState({
@@ -24,61 +23,88 @@ function Login() {
     setValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setErrors(Validation(values));
+
+  //   if (errors.name === "" && errors.email === "" && errors.password === "") {
+  //     axios
+  //       .post("http://localhost:8081/signup", values)
+  //       .then((res) => {
+  //         toast.success("Account created");
+  //         navigate("/");
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(Validation(values));
-    if (errors.name === "" && errors.email === "" && errors.password === "") {
-      axios
-        .post("http://localhost:8081/signup", values)
-        .then((res) => {
-          toast.success("Account created");
-          navigate("/");
-        })
-        .catch((err) => console.log(err));
-    }
+
+    axios
+      .post("http://localhost:8081/signup", values)
+      .then((res) => {
+        toast.success("Account created");
+        navigate("/");
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 400) {
+          // Handle the "Email already exists" error
+          toast.error("Email already exists");
+        } else {
+          console.log(err);
+        }
+      });
   };
 
   return (
     <div className="LoginSignup-div">
-      <div className="bg-image "></div>
-      <form className="form-container" onSubmit={handleSubmit}>
-        <h4 className="text">Create your account</h4>
-        <div className="inputs">
-          <div className="input">
-            <img src={Person} alt="" />
-            <input
-              type="text"
-              onChange={handleInput}
-              name="name"
-              placeholder="Name"
-            />
-          </div>
-          <div className="input">
-            <img src={Email} alt="" />
-            <input
-              type="text"
-              onChange={handleInput}
-              name="email"
-              placeholder="Email"
-            />
-          </div>
-          <div className="input">
-            <img src={Password} alt="" />
-            <input
-              type="password"
-              onChange={handleInput}
-              name="password"
-              placeholder="Password"
-            />
-          </div>
+      <div className="bg-image"></div>
+      <div className="main-container">
+        <div className="title-div">
+          <h4 className="text">Create an account</h4>
         </div>
-        <div className="login-link">
-          Already have an account? <Link to="/">Login here</Link>
-        </div>
-        <button type="submit" className="submit">
-          Sign up
-        </button>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <div className="inputs">
+            <div className="input">
+              <HiOutlineUser className="icons" />
+              <input
+                type="text"
+                onChange={handleInput}
+                name="name"
+                placeholder="Name"
+                required
+              />
+            </div>
+            <div className="input">
+              <AiOutlineMail className="icons" />
+              <input
+                type="text"
+                onChange={handleInput}
+                name="email"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div className="input">
+              <RiLockPasswordLine className="icons" />
+              <input
+                type="password"
+                onChange={handleInput}
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+          </div>
+          <button type="submit" className="submit">
+            Sign up
+          </button>
+          <div className="login-link">
+            Already have an account? <Link to="/">Login</Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

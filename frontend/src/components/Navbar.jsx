@@ -42,13 +42,13 @@ function Navbar() {
         <li>
           <NavLink to="/contact">
             {/* <AiOutlineContacts className="icons" /> */}
-            Contact Us
+            Contact
           </NavLink>
         </li>
         <li>
           <NavLink to="/about">
             {/* <FcAbout className="icons" style={{ color: "#fff" }} /> */}
-            About Us
+            About
           </NavLink>
         </li>
         <div onClick={() => setDropdown((prev) => !prev)}>

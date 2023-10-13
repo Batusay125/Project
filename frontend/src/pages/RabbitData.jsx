@@ -6,85 +6,71 @@ import axios from "axios";
 import "./style.css";
 import { Link, useParams } from "react-router-dom";
 import Rabbit from "../images/rabbit-contact.png";
-import { GrClose } from "react-icons/gr";
+import Navbar from "../components/Navbar";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 function RabbitData() {
   const { id } = useParams();
-  const [rabbit, setRabbit] = useState([]);
+  console.log(id);
+  const [rabbits, setRabbits] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:8081/rabbitdata/" + id)
       .then((res) => {
         console.log(res);
-        setRabbit(res.data[0]);
+        setRabbits(res.data[0]);
       })
       .catch((err) => console.log(err));
   }, []);
 
   return (
-    <div className="rabbitData-container">
-      <div>
-        <Link to="/adopt">
-          <GrClose className="close-btn" />
-        </Link>
-        <img src={Rabbit} alt="" />
-        <h5>Hi, I'm {rabbit.name}. I am looking for a new home.</h5>
-        <br />
-        <h5>About me: </h5>
-        <br />
-        <div className="rabbitDetails">
+    <div className="main-div">
+      <Navbar />
+      <div className="rabbit-data-div">
+        <div className="cards">
+          <h2>About {rabbits.name}</h2>
           <div>
-            <h6>RabbitID</h6>
+            <Link to="/adopt" className="back">
+              <IoIosArrowRoundBack className="icons" /> Back
+            </Link>
           </div>
-          <div>
-            <h6>: {rabbit.rabbit_id}</h6>
+          <div className="img-div">
+            <img variant="top" src={Rabbit} /> <br />
           </div>
-        </div>
-        <div className="rabbitDetails">
-          <div>
-            <h6>Name</h6>
-          </div>
-          <div>
-            <h6>: {rabbit.name}</h6>
-          </div>
-        </div>
-        <div className="rabbitDetails">
-          <div>
-            <h6>Age</h6>
-          </div>
-          <div>
-            <h6>: {rabbit.age} month/s</h6>
-          </div>
-        </div>
-        <div className="rabbitDetails">
-          <div>
-            <h6>Sex</h6>
-          </div>
-          <div>
-            <h6>: {rabbit.sex}</h6>
-          </div>
-        </div>
-        <div className="rabbitDetails">
-          <div>
-            <h6>Weight</h6>
-          </div>
-          <div>
-            <h6>: {rabbit.weight} klg</h6>
-          </div>
-        </div>
-        <div className="rabbitDetails">
-          <div>
-            <h6>Breed</h6>
-          </div>
-          <div>
-            <h6>: N/A</h6>
+          <div className="cards-body">
+            <div className="cards-title">{rabbits.name}</div>
+            <div className="cards-text">
+              <h5>Hi, I'm {rabbits.name} and I am looking for a new home. </h5>
+              <br />
+              <div className="data-div">
+                <div>
+                  <h5>Rabbit Id</h5>
+                  <h5>Breed</h5>
+                  <h5>Sex</h5>
+                  <h5>Age</h5>
+                  <h5>Weight</h5>
+                </div>
+                <div>
+                  <h5>: {rabbits.id}</h5>
+                  <h5>: {rabbits.breed}</h5>
+                  <h5>: {rabbits.sex}</h5>
+                  <h5>: {rabbits.age} months</h5>
+                  <h5>: {rabbits.weight} klgs</h5>
+                </div>
+              </div>
+            </div>
+            <div>
+              <Link
+                to={`/rabbitdata/${rabbits.id}/adopt-form`}
+                className="btn form-control apply-btn"
+              >
+                Apply for Adopt
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-      <Link to="/form" type="" className="btn btn-primary mt-4">
-        Apply for adoption
-      </Link>
     </div>
   );
 }
