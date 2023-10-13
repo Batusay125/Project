@@ -27,7 +27,7 @@ function BreedPair() {
       <div className="breed-pair-div">
         <Header />
         <br />
-        <h1>Add Breeding Pair</h1>
+        <h1>Add Rabbit Pair</h1>
         <br />
         <div className="breed-ground">
           <div className="ground">

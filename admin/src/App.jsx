@@ -32,7 +32,7 @@ export const AuthContext = createContext(null);
 import SecureStore from "react-secure-storage";
 import BreedingData from "./Pages/BreedingData";
 import AddBreedPair from "./Pages/AddBreedPair";
-import Messages from "./Pages/Messages";
+import Request from "./Pages/Request";
 
 function App() {
   const signIn = useContext(AuthContext);
@@ -135,10 +135,10 @@ function App() {
       ),
     },
     {
-      path: "/messages",
+      path: "/request",
       element: (
         <div>
-          <Messages />
+          <Request />
         </div>
       ),
     },

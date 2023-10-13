@@ -50,7 +50,7 @@ function Sidebar() {
         </li>
         <li>
           <TiMessages className="icons" />
-          <Link to="/messages">Messages</Link>
+          <Link to="/request">Request</Link>
         </li>
         <li>
           <RiLogoutCircleLine className="icons" />

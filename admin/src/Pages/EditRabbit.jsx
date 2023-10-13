@@ -81,7 +81,6 @@ function EditRabbit() {
             aria-label="Default select example"
             onChange={handleInput}
             name="sex"
-            required
           >
             <option value="" hidden>
               {values.sex}
@@ -100,7 +99,6 @@ function EditRabbit() {
             required
           />
           <br />
-
           <label htmlFor="">Code :</label>
           <div className="App">
             {value && (
@@ -115,11 +113,12 @@ function EditRabbit() {
           </div>
           <br />
           <br />
-
-          <Link to="/rabbitlist" className="btn btn-secondary m-2">
-            Cancel
-          </Link>
-          <button className="btn btn-primary m-2">Update</button>
+          <div style={{ display: "flex", gap: "10px" }}>
+            <Link to="/rabbitlist" className="secondary text-decoration-none">
+              Cancel
+            </Link>
+            <button className="primary">Update</button>
+          </div>
         </form>
       </div>
     </div>
