@@ -75,6 +75,14 @@ button {
     padding: 30px;
 }
 
+/* Dashboard */
+
+.dashboard-card {
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+}
+
 /* Activity.jsx */
 .activity-div {
     width: 40%;

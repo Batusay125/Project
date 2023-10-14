@@ -10,7 +10,7 @@ function MyApplication() {
   const { id } = useParams();
   const [values, setValues] = useState([]);
   const user = SecureStore.getItem("userToken");
-  
+
   useEffect(() => {
     axios
       .get("http://localhost:8081/myapplication/" + user.id)
@@ -52,7 +52,16 @@ function MyApplication() {
                 <td width={100}>{data.adoption_date}</td>
                 <td>{data.reason_for_adoption}</td>
                 <td width={100}>
-                  {data.transaction_status === "COMPLETE" ? (<span style={{color: "green"}}>{data.transaction_status}</span>) : (<span style={{color: "red"}}>{data.transaction_status}</span>)}</td>
+                  {data.transaction_status === "COMPLETE" ? (
+                    <span style={{ color: "green" }}>
+                      {data.transaction_status}
+                    </span>
+                  ) : (
+                    <span style={{ color: "red" }}>
+                      {data.transaction_status}
+                    </span>
+                  )}
+                </td>
                 <td className="action-btn">
                   <ViewApplication data={data} />
                   <button class="danger" onClick={(e) => handleDelete(data.id)}>
