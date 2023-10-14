@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginSignup.css";
 import Validation from "./LoginValidation.jsx";
@@ -6,8 +6,11 @@ import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import axios from "axios";
 import { toast } from "react-toastify";
+import SecureStore from "react-secure-storage";
+import { AuthContext } from "../App";
 
 function Login() {
+  const authContext = useContext(AuthContext);
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -21,13 +24,17 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8081/api/login-client", values)
+      .post("http://localhost:8081/login-client", values)
       .then((res) => {
-        if (res.data) {
+        if (res.data.Message === "Success") {
           // Assuming the server responds with a 'token' field upon successful login
           // const token = res.data.token;
           // Store the JWT token securely (e.g., in localStorage)
-          localStorage.setItem("token", "dfgsdg");
+          // localStorage.setItem("token", res.data.email);
+
+          const user = res.data;
+          SecureStore.setItem("userToken", user);
+          authContext.signIn(user);
           toast.success("Login successfully");
           navigate("/home");
         } else {

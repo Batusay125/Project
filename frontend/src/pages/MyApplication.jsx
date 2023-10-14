@@ -4,13 +4,16 @@ import { Table } from "react-bootstrap";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ViewApplication from "./ViewApplication";
+import SecureStore from "react-secure-storage";
 
 function MyApplication() {
   const { id } = useParams();
   const [values, setValues] = useState([]);
+  const user = SecureStore.getItem("userToken");
+  
   useEffect(() => {
     axios
-      .get("http://localhost:8081/myapplication")
+      .get("http://localhost:8081/myapplication/" + user.id)
       .then((res) => setValues(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -44,11 +47,11 @@ function MyApplication() {
           <tbody>
             {values.map((data, i) => (
               <tr key={i}>
-                <td>{data.id}</td>
+                <td width={100}>{data.id}</td>
                 <td>{data.rabbit_id}</td>
-                <td>{data.adoption_date}</td>
+                <td width={100}>{data.adoption_date}</td>
                 <td>{data.reason_for_adoption}</td>
-                <td>Pending</td>
+                <td width={100}>{data.transaction_status}</td>
                 <td className="action-btn">
                   <ViewApplication data={data} />
                   <button class="danger" onClick={(e) => handleDelete(data.id)}>

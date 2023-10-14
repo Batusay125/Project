@@ -13,6 +13,15 @@ import RabbitData from "./pages/RabbitData.jsx";
 import AddRabbit from "./pages/AddRabbit.jsx";
 import AboutRabbit from "./pages/AboutRabbit.jsx";
 import NewForm from "./pages/NewForm.jsx";
+import {
+  createContext,
+  useMemo,
+  useEffect,
+  useReducer,
+  useContext,
+} from "react";
+export const AuthContext = createContext(null);
+import SecureStore from "react-secure-storage";
 
 function App() {
   const router = createBrowserRouter([
@@ -113,22 +122,80 @@ function App() {
       ),
     },
   ]);
+
+  const signIn = useContext(AuthContext);
+
+  const [state, dispatch] = useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case "RESTORE_TOKEN":
+          console.log("----RESTORE_TOKEN----");
+          return {
+            ...prevState,
+            userToken: action.token,
+          };
+        case "SIGN_IN":
+          console.log("----SIGN_IN----");
+          return {
+            ...prevState,
+            isSignOut: false,
+            userToken: action.token,
+          };
+        case "SIGN_OUT":
+          console.log("----SIGN_OUT----");
+          return {
+            ...prevState,
+            isSignOut: true,
+            userToken: null,
+          };
+      }
+    },
+    {
+      isSignOut: false,
+      userToken: null,
+    }
+  );
+
+  const authContext = useMemo(
+    () => ({
+      signIn: (data) => {
+        SecureStore.setItem("userToken", data);
+        dispatch({ type: "SIGN_IN", token: data });
+      },
+      signOut: () => {
+        SecureStore.clear();
+        dispatch({ type: "SIGN_OUT" });
+      },
+    }),
+    []
+  );
+
+
+  useEffect(() => {
+    console.log("---------APP USE EFFECT---------");
+    let userToken = localStorage.getItem("userToken");
+    dispatch({ type: "RESTORE_TOKEN", token: userToken });
+  }, []);
+
   return (
-    <div className="app">
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover={false}
-        theme="light"
-      ></ToastContainer>
-      <RouterProvider router={router} />
-    </div>
+    <AuthContext.Provider value={authContext}>
+      <div className="app">
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover={false}
+          theme="light"
+        ></ToastContainer>
+        <RouterProvider router={router} />
+      </div>
+    </AuthContext.Provider>
+
   );
 }
 

@@ -38,11 +38,18 @@ router.post("/login-client", (req, res) => {
     }
     if (data.length > 0) {
       // User is authenticated, generate a JWT token
+      
+      const result = JSON.parse(JSON.stringify(data));
+      const o = result[0];
       const user = {
-        email: req.body.email,
+        id: o.id,
+        name: o.name,
+        email: o.email,
+        Message: "Success"
       };
-      //   const token = jwt.sign(user, secretKey, { expiresIn: "1h" }); // Token expires in 1 hour
-      return res.json({ Message: "Success" });
+
+        // const token = jwt.sign(user, secretKey, { expiresIn: "1h" }); // Token expires in 1 hour
+      return res.json(user);
     }
     return res.json({ Message: "Failed" });
   });
@@ -123,13 +130,18 @@ router.post("/rabbitdata/:id/adopt-form", (req, res) => {
     req.body.postalcode,
     req.body.reason,
     req.body.otherpets,
+    req.body.user_id,
+    req.body.transaction_status
   ];
+  console.log(values);
   const sql =
-    "INSERT INTO adoption (`rabbit_id`, `adoption_date`, `fullname`, `email`, `phone`, `province`, `city`, `barangay`, `postal_code`, `reason_for_adoption`, `other_pets`) VALUES (?)";
+    "INSERT INTO adoption (`rabbit_id`, `adoption_date`, `fullname`, `email`, `phone`, `province`, `city`, `barangay`, `postal_code`, `reason_for_adoption`, `other_pets`, `user_id`, `transaction_status`) VALUES (?)";
   db.query(sql, [values], (error, results) => {
     if (error) {
+      console.log(error);
       return res.json("Error");
     }
+    console.log("Successfully inserted.");
     return res.json(results);
   });
 });
@@ -169,5 +181,30 @@ router.get("/rabbitlist", (req, res) => {
     res.json(results);
   });
 });
+
+router.get("/myapplication/:id", (req, res) => {
+  const id = req.params.id;
+  db.query("SELECT * FROM adoption WHERE user_id = ?", [id], (err, results) => {
+    if (err) {
+      console.error("Error fetching :", err);
+      res.status(500).json({ error: "Internal Server Error" });
+      return;
+    }
+
+    
+    return res.json(results);
+  });
+});
+
+router.delete("/delete_application/:id", (req, res) => {
+  const id = req.params.id;
+  db.query("DELETE FROM adoption WHERE id = ?", [id], (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    res.json(result);
+  });
+});
+
 
 module.exports = router;

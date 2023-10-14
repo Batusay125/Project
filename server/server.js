@@ -21,4 +21,4 @@ const breeding = require("./routes/breeding");
 app.use("/api", breeding);
 
 const client = require("./routes/client");
-app.use("/api", client);
+app.use("", client);

@@ -7,8 +7,10 @@ import Img2 from "../images/santol.jpg";
 import Img3 from "../images/banana.jpg";
 import Footer from "../components/footer.jsx";
 import { Link } from "react-router-dom";
+import SecureStore from "react-secure-storage";
 
 function Home() {
+  const user = SecureStore.getItem("userToken");
   return (
     <div className="main-div">
       <Navbar />
