@@ -24,4 +24,15 @@ router.get("/adoptions", (req, res) => {
   });
 });
 
+router.get("/myapplication", (req, res) => {
+  db.query("SELECT * FROM adoption", (err, results) => {
+    if (err) {
+      console.error("Error fetching :", err);
+      res.status(500).json({ error: "Internal Server Error" });
+      return;
+    }
+    return res.json(results);
+  });
+});
+
 module.exports = router;

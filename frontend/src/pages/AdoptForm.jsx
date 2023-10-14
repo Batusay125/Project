@@ -4,11 +4,14 @@ import Navbar from "../components/Navbar";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { toast } from "react-toastify";
+import SecureStore from "react-secure-storage";
 
 function AdoptForm() {
   const { id, name } = useParams();
   const navigateTo = useNavigate();
   const date = new Date().toLocaleDateString();
+  const user = SecureStore.getItem("userToken");
+
   const [values, setValues] = useState({
     rabbit_id: id,
     data: "",
@@ -21,6 +24,8 @@ function AdoptForm() {
     postalcode: "",
     reason: "",
     otherpets: "",
+    user_id: user.id,
+    transaction_status: "PENDING"
   });
   const handleInput = (e) => {
     setValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
