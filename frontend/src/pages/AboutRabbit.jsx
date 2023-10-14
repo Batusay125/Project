@@ -36,7 +36,7 @@ function AboutRabbit({ data }) {
         </Modal.Header>
         <Modal.Body>
           <div className="image-div">
-            <img src={Rabbit} alt="" />
+            <img src={data.image_path} alt="" />
           </div>
           <br />
           <p>Hi, my name is {data.name} and I am looking for a new home.</p>
