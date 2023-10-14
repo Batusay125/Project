@@ -35,4 +35,18 @@ router.get("/myapplication", (req, res) => {
   });
 });
 
+router.put("/approve-adoption/:id", (req, res) => {
+  const sql =
+    "UPDATE adoption SET `transaction_status` = ? WHERE id = ?";
+  const values = ["APPROVE"];
+  const id = req.params.id;
+
+  db.query(sql, [...values, id], (err, data) => {
+    if (err) {
+      return res.json("Error");
+    }
+    return res.json(data);
+  });
+});
+
 module.exports = router;

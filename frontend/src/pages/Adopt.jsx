@@ -43,7 +43,7 @@ function Adopt() {
         <div className="rabbitList">
           {record.map((data, i) => (
             <Card key={i} style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={data.image_path} height={250}/>
+              <Card.Img variant="top" src={data.image_path} height={250} alt="No Image"/>
               <Card.Body style={{ backgroundColor: "#00828c", color: "#fff" }}>
                 <Card.Title>{data.name}</Card.Title>
                 <Card.Text>
