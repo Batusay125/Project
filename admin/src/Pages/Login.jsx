@@ -54,7 +54,7 @@ function Login() {
 
   return (
     <div className="loginPage flex">
-      <div className="container flex">
+      <div className="container">
         <div className="welcome-div">
           <h2>
             <span className="welcome-span">Welcome back to</span>

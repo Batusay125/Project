@@ -11,6 +11,8 @@ function Delivery() {
         <Header />
         <br />
         <h1>Delivery</h1>
+
+        
       </div>
     </div>
   );

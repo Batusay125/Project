@@ -28,6 +28,7 @@ import Chart from "./Pages/Chart";
 import CreateNewPass from "./Pages/CreateNewPass";
 import Breeding from "./Pages/Breeding";
 
+
 export const AuthContext = createContext(null);
 import SecureStore from "react-secure-storage";
 import BreedingData from "./Pages/BreedingData";
@@ -61,7 +62,6 @@ function App() {
         </div>
       ),
     },
-
     {
       path: "/dashboard",
       element: (
