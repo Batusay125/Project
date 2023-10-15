@@ -11,16 +11,25 @@ import axios from "axios";
 const BASE_URL = appConfig.apiBasePath;
 
 function BreedPair() {
-  const [rabbits, setRabbits] = useState([]);
+  const [maleRabbits, setMaleRabbits] = useState([]);
+  const [femaleRabbits, setFemaleRabbits] = useState([]);
 
   useEffect(() => {
     axios
-      .get(BASE_URL + "/add-breed-pair")
+      .get(BASE_URL + "/rabbit/male")
       .then((res) => {
-        setRabbits(res.data);
+        setMaleRabbits(res.data);
       })
       .catch((err) => console.log(err));
-    console.log(rabbits);
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(BASE_URL + "/rabbit/female")
+      .then((res) => {
+        setFemaleRabbits(res.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const [scanResult, setScanResult] = useState();
@@ -74,7 +83,7 @@ function BreedPair() {
       <div className="breed-pair-div">
         <Header />
         <br />
-        <h1>Add Breeding Pair</h1>
+        <h1>Add Rabbit Pair</h1>
         <br />
         <div className="breed-ground">
           <div className="ground">
@@ -83,7 +92,7 @@ function BreedPair() {
               <option value="" hidden>
                 Select rabbit
               </option>
-              {rabbits.map((data, i) => (
+              {maleRabbits.map((data, i) => (
                 <option key={i} value={data.name}>
                   {data.name}
                 </option>
@@ -101,7 +110,7 @@ function BreedPair() {
               <option value="" hidden>
                 Select rabbit
               </option>
-              {rabbits.map((data, i) => (
+              {femaleRabbits.map((data, i) => (
                 <option key={i} value={data.name}>
                   {data.name}
                 </option>
@@ -115,11 +124,13 @@ function BreedPair() {
             <button className="btn btn-primary">Scan code</button>
           </div>
         </div>
-        <div className="btn-div">
-          <Link to="/breeding" className="btn btn-secondary cancel">
+        <br />
+        <br />
+        <div className="actions">
+          <Link to="/breeding" className="secondary text-decoration-none">
             Cancel
           </Link>
-          <Link to="/breeding" className="btn btn-primary pair">
+          <Link to="/breeding" className="primary text-decoration-none">
             Pair now
           </Link>
         </div>

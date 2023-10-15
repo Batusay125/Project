@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import Header from "../Components/Header";
 import "./Style.css";
@@ -6,8 +6,22 @@ import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { AiOutlineDatabase } from "react-icons/ai";
+import axios from "axios";
+
+import appConfig from "../../config.json";
+const BASE_URL = appConfig.apiBasePath;
 
 function Breeding() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(BASE_URL + "/breeding")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className="main-div">
       <Sidebar />
@@ -16,34 +30,42 @@ function Breeding() {
         <br />
         <h1>Breeding Pair List</h1>
         <br />
-        <Link to="/add-breed-pair" className="btn btn-success breed-btn">
-          Breed Rabbit
-        </Link>
+        <div className="d-flex">
+          <Link
+            to="/add-breed-pair"
+            className="success breed-btn text-decoration-none"
+          >
+            Add Pair
+          </Link>
+        </div>
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Pair_Id</th>
+              <th>Pair Id</th>
               <th>Buck</th>
               <th>Doe</th>
-              <th>Mating date</th>
+              <th>Pairing date</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Totoro</td>
-              <td>Girly</td>
-              <td>10/06/2023</td>
-              <td>
-                <Link to="/breed-data" className="btn btn-primary action-btn">
-                  <AiOutlineDatabase className="view" />
-                </Link>
-                <button className="btn btn-danger action-btn">
-                  <RiDeleteBin7Line />
-                </button>
-              </td>
-            </tr>
+            {data.map((data, i) => (
+              <tr key={i}>
+                <td>{data.id}</td>
+                <td>{data.buck_id}</td>
+                <td>{data.doe_id}</td>
+                <td>{data.pairing_date}</td>
+                <td className="actions">
+                  <Link
+                    to="/breed-data"
+                    className="secondary text-decoration-none"
+                  >
+                    View
+                  </Link>
+                  <button className="danger">Delete</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>

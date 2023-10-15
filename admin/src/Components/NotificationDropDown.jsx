@@ -18,10 +18,6 @@ function NotificationDropDown() {
         <IoNotificationsOutline className="icons noti-icon" />
         <p>Cynthia Lorio likes your post</p>
       </div>
-      <div className="noti-div">
-        <IoNotificationsOutline className="icons noti-icon" />
-        <p>John Lorio likes your post</p>
-      </div>
     </div>
   );
 }

@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 function RabbitList() {
-  const [data, setData] = useState();
   const [rabbits, setRabbits] = useState([]);
 
   useEffect(() => {

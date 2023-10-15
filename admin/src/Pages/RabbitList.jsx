@@ -11,7 +11,7 @@ import { BsSend } from "react-icons/bs";
 import { RiDeleteBin7Line } from "react-icons/ri";
 
 import appConfig from "../../config.json";
-const BASE_URL = appConfig.apiBasePath; //e.g "http://localhost:8080/api"
+const BASE_URL = appConfig.apiBasePath;
 
 function RabbitList() {
   const [rabbits, setRabbits] = useState([]);
@@ -63,9 +63,14 @@ function RabbitList() {
           />
         </div>
         <br />
-        <Link to="/add-rabbit" className="btn btn-primary addRabbit">
-          Add Rabbit
-        </Link>
+        <div className="d-flex">
+          <Link
+            to="/add-rabbit"
+            className="primary text-decoration-none addRabbit"
+          >
+            Add Rabbit
+          </Link>
+        </div>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -87,21 +92,19 @@ function RabbitList() {
                 <td>{data.age}</td>
                 <td>{data.sex}</td>
                 <td>{data.weight}</td>
-                <td>
+                <td className="actions">
                   <Link
                     to={`/edit-rabbit/${data.id}`}
-                    className="btn btn-success action-btn"
+                    className="success text-decoration-none"
                   >
-                    <FiEdit />
+                    Edit
                   </Link>
-                  <button className="btn btn-primary action-btn">
-                    <BsSend />
-                  </button>
+                  <button className="primary">Rehome</button>
                   <button
-                    className="btn btn-danger action-btn"
+                    className="danger"
                     onClick={(e) => handleDelete(data.id)}
                   >
-                    <RiDeleteBin7Line />
+                    Delete
                   </button>
                 </td>
               </tr>

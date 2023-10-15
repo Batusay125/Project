@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Form } from "react-bootstrap";
 import RabbitList from "./RabbitList.jsx";
 
 function AddRabbit() {
@@ -31,7 +32,7 @@ function AddRabbit() {
       <h1 className="text-center">Add a Rabbit</h1>
       <br />
       <form onSubmit={handleSubmit}>
-        <label for="">Name</label>
+        <label for="">Rabbit name :</label>
         <input
           type="text"
           name="name"
@@ -39,7 +40,7 @@ function AddRabbit() {
           className="form-control"
           required
         />
-        <label for="">Age (months)</label>
+        <label for="">Age (months) :</label>
         <input
           type="number"
           name="age"
@@ -47,15 +48,19 @@ function AddRabbit() {
           className="form-control"
           required
         />
-        <label for="">Sex</label>
-        <input
-          type="text"
-          name="sex"
+        <br />
+        <label for="">Sex :</label>
+        <Form.Select
+          aria-label="Default select example"
           onChange={handleInput}
-          className="form-control"
-          required
-        />
-        <label for="">Weight (klg)</label>
+          name="sex"
+        >
+          <option>Select</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </Form.Select>
+        <br />
+        <label for="">Weight (klg) :</label>
         <input
           type="number"
           name="weight"

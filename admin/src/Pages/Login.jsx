@@ -30,7 +30,7 @@ function Login() {
       LoginPassowrd: loginPassword,
     }).then((response) => {
       const user = response.data[0];
-      if (user.username === loginUserName && user.password === loginPassword) {
+      if (user.email === loginUserName && user.password === loginPassword) {
         SecureStore.setItem("userToken", user);
         authContext.signIn(user);
         navigateTo("/dashboard"); // if the credebntial match in db

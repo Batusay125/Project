@@ -83,10 +83,12 @@ function AddRabbit() {
             required
           />
           <br />
-          <Link to="/rabbitlist" className="btn btn-secondary m-2">
-            Back
-          </Link>
-          <button className="btn btn-primary m-2">Add</button>
+          <div className="actions">
+            <Link to="/rabbitlist" className="secondary text-decoration-none">
+              Back
+            </Link>
+            <button className="primary">Add</button>
+          </div>
         </form>
       </div>
     </div>

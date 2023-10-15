@@ -8,39 +8,55 @@ import axios from "axios";
 import RabbitData from "./RabbitData.jsx";
 import { Link } from "react-router-dom";
 import Footer from "../components/footer.jsx";
+import AboutRabbit from "./AboutRabbit.jsx";
 
 function Adopt() {
-  const [data, setData] = useState();
   const [rabbits, setRabbits] = useState([]);
+  const [record, setRecord] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:8081/adopt")
-      .then((res) => setRabbits(res.data))
+      .then((res) => {
+        setRabbits(res.data);
+        setRecord(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
+
+  const Filter = (e) => {
+    setRecord(
+      rabbits.filter((f) => f.name.toLowerCase().includes(e.target.value))
+    );
+  };
 
   return (
     <div className="main-div">
       <Navbar />
-      <div className="rehome-div">
-        <h2>Adopt a Rabbit</h2>
+      <div className="adopt-div">
+        <h2>Adoptable Rabbits</h2> <br />
+        <div className="search-input">
+          <span>Search</span>
+          <input type="text" onChange={Filter} />
+          <br />
+        </div>
         <div className="rabbitList">
-          {rabbits.map((data, i) => (
+          {record.map((data, i) => (
             <Card key={i} style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={Rabbit1} />
-              <Card.Body>
+              <Card.Img variant="top" src={data.image_path} height={250} alt="No Image"/>
+              <Card.Body style={{ backgroundColor: "#00828c", color: "#fff" }}>
                 <Card.Title>{data.name}</Card.Title>
                 <Card.Text>
-                  Hi, my name is {data.name}. I am {data.age} months old and I
-                  am looking for a new home.
+                  • {data.sex} <br />• {data.age} months <br />• {data.weight}{" "}
+                  pounds
                 </Card.Text>
-                <Link
-                  to={`/rabbitdata/${data.rabbit_id}`}
-                  className="btn btn-primary"
+                <AboutRabbit data={data} />
+                {/* <Link
+                  to={`/rabbitdata/${data.id}`}
+                  className="btn form-control see-details"
                 >
                   See details
-                </Link>
+                </Link> */}
               </Card.Body>
             </Card>
           ))}

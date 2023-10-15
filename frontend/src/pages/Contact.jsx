@@ -9,7 +9,7 @@ function Contact() {
     <div className="main-div">
       <Navbar />
       <div className="contact-div">
-        <h2>SEND US A MESSAGE</h2>
+        <h2 className="send-us">Send us a message</h2>
         <br />
         <div>
           <h4>Email us at:</h4>

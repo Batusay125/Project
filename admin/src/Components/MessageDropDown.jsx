@@ -23,10 +23,6 @@ function MessageDropDown() {
         <img src="" alt="" className="profile" />
         <p>Cynthia Lorio</p>
       </div>
-      <div className="chat-div">
-        <img src="" alt="" className="profile" />
-        <p>John Lorio</p>
-      </div>
     </div>
   );
 }

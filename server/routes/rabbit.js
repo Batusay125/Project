@@ -38,8 +38,21 @@ router.get("/rabbits", (req, res) => {
   });
 });
 
-router.get("/add-breed-pair", (req, res) => {
-  db.query("SELECT * FROM rabbit", (err, results) => {
+// Get male rabbit
+router.get("/rabbit/male", (req, res) => {
+  db.query(`SELECT * FROM rabbit WHERE sex = "male"`, (err, results) => {
+    if (err) {
+      console.error("Error fetching rabbit:", err);
+      res.status(500).json({ error: "Internal Server Error" });
+      return;
+    }
+    return res.json(results);
+  });
+});
+
+// Get female rabbit
+router.get("/rabbit/female", (req, res) => {
+  db.query(`SELECT * FROM rabbit WHERE sex = "female"`, (err, results) => {
     if (err) {
       console.error("Error fetching rabbit:", err);
       res.status(500).json({ error: "Internal Server Error" });
