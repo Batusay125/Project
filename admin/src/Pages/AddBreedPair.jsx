@@ -100,7 +100,6 @@ function BreedPair() {
             </Form.Select>
             <span>or</span>
             {scanResult ? <div>Result: {scanResult}</div> : <div id="reader"></div>}
-            <div>Result: {scanResult}</div> 
            <button className="btn btn-primary">Scan code</button> 
           </div>
           <div className="center-ground">Matching result</div>
@@ -119,8 +118,6 @@ function BreedPair() {
 
             <span>or</span>
             {scanResult1 ? <div>Result: {scanResult1}</div> : <div id="reader1"></div>}
-
-            <div className="result">{scanResult1}</div>
             <button className="btn btn-primary">Scan code</button>
           </div>
         </div>
