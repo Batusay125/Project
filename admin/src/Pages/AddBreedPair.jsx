@@ -4,11 +4,13 @@ import Sidebar from "../Components/Sidebar";
 import Header from "../Components/Header";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import appConfig from "../../config.json";
 import Scanner from "./Scanner"
 import { Html5QrcodeScanner } from "html5-qrcode";
 import axios from "axios";
+import appConfig from "../../config.json";
 const BASE_URL = appConfig.apiBasePath;
+
+
 
 function BreedPair() {
   const [maleRabbits, setMaleRabbits] = useState([]);
@@ -32,8 +34,8 @@ function BreedPair() {
       .catch((err) => console.log(err));
   }, []);
 
-  const [scanResult, setScanResult] = useState(null);
-  const [scanResult1, setScanResult1] = useState(null);
+  const [scanResult, setScanResult] = useState();
+  const [scanResult1, setScanResult1] = useState();
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
@@ -49,13 +51,14 @@ function BreedPair() {
     function success(result) {
       scanner.clear();
       setScanResult(result);
+      console.log(result);
     }
 
     function error(err) {
       console.warn(err);
     }
   }, []);
-
+  
 
   useEffect(() => {
     const scanner1 = new Html5QrcodeScanner("reader1", {
@@ -77,6 +80,19 @@ function BreedPair() {
       console.warn(err);
     }
   }, []);
+
+  const onPair = (e) =>{
+    axios.post(BASE_URL + "/pair-rabbit", {
+      male_rabbit_id: scanResult.substring(4, 5),
+      female_rabbit_id: scanResult1.substring(4, 5)
+    })  
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => console.log(err));
+
+    console.log("onpair")
+  }
 
   return (
     <div className="main-div">
@@ -128,7 +144,7 @@ function BreedPair() {
           <Link to="/breeding" className="secondary text-decoration-none">
             Cancel
           </Link>
-          <Link to="/breeding" className="primary text-decoration-none">
+          <Link to="/breeding" onClick={e => onPair(e)} className="primary text-decoration-none">
             Pair now
           </Link>
         </div>

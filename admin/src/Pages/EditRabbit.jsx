@@ -104,7 +104,7 @@ function EditRabbit() {
             {value && (
               <QRCode
                 title="GeeksForGeeks"
-                value={`Name: ${values.name} Age: ${values.age} Sex: ${values.sex} Weight: ${values.weight}`}
+                value={`Id: ${values.id}, Name: ${values.name}, Age: ${values.age}, Sex: ${values.sex}, Weight: ${values.weight}`}
                 bgColor={back}
                 fgColor={fore}
                 size={size === "" ? 0 : size}
