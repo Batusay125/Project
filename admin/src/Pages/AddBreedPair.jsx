@@ -32,8 +32,8 @@ function BreedPair() {
       .catch((err) => console.log(err));
   }, []);
 
-  const [scanResult, setScanResult] = useState();
-  const [scanResult1, setScanResult1] = useState();
+  const [scanResult, setScanResult] = useState(null);
+  const [scanResult1, setScanResult1] = useState(null);
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
@@ -56,6 +56,7 @@ function BreedPair() {
     }
   }, []);
 
+
   useEffect(() => {
     const scanner1 = new Html5QrcodeScanner("reader1", {
       qrbox: {
@@ -68,7 +69,7 @@ function BreedPair() {
     scanner1.render(success, error);
 
     function success(result) {
-      scanner.clear();
+      scanner1.clear();
       setScanResult1(result);
     }
 
