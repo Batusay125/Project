@@ -13,4 +13,15 @@ router.get("/breeding", (req, res) => {
   });
 });
 
+router.post("/pair-rabbit", (req, res) => {
+  const sql = "INSERT INTO breeding_pair (`buck_id`, `doe_id`, `pairing_date` ) VALUES (?)";
+  const values = [req.body.male_rabbit_id, req.body.female_rabbit_id, new Date()];
+  db.query(sql, [values], (err, data) => {
+    if (err) {
+      return res.json("Error");
+    }
+    return res.json(data);
+  });
+});
+
 module.exports = router;
