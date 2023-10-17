@@ -26,8 +26,8 @@ function BreedingDetails({data}) {
             <div>
                 <p>: {data.buck_id}</p>
                 <p>: {data.doe_id}</p>
-                <p>: {data.pairing_date}</p>
                 <p>: {data.id}</p>
+                <p>: {data.pairing_date}</p>
             </div>
           </Modal.Body>
           <Modal.Footer >
