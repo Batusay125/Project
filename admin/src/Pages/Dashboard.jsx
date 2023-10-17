@@ -13,6 +13,7 @@ function Dashboard() {
   const user = SecureStore.getItem("userToken");
 
   const [rabbitCount, setRabbitCount] = useState(0);
+  const [pending, setPending] = useState(0);
 
   useEffect(() => {
     axios
@@ -23,6 +24,17 @@ function Dashboard() {
       .catch((error) => {
         console.error(error);
       });
+    
+    //see dashboard.js
+    axios
+      .get(BASE_URL +"/pending-adoption")
+      .then((response) => {
+        setPending(response.data[0].pending);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
   }, []);
 
   return (
@@ -72,7 +84,7 @@ function Dashboard() {
             }}
           >
             <h4>Pending Request</h4>
-            <h1>150</h1>
+            <h1>{pending}</h1>
           </div>
 
           <div
