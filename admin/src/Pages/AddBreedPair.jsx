@@ -83,8 +83,8 @@ function BreedPair() {
 
   const onPair = (e) =>{
     axios.post(BASE_URL + "/pair-rabbit", {
-      male_rabbit_id: scanResult.substring(4, 5),
-      female_rabbit_id: scanResult1.substring(4, 5)
+      male_rabbit_id: scanResult.substring(4, scanResult.indexOf(",")),
+      female_rabbit_id: scanResult1.substring(4, scanResult1.indexOf(","))
     })  
     .then((res) => {
       console.log(res);

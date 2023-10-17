@@ -3,8 +3,6 @@ const router = express.Router();
 const db = require("../config/db");
 
 router.get("/pending-adoption", (req, res) => {
-
-    
   db.query("SELECT count(*) as pending FROM adoption where transaction_status = 'PENDING'", (err, results) => {
     if (err) {
       console.error("Error fetching :", err);
@@ -15,6 +13,5 @@ router.get("/pending-adoption", (req, res) => {
   });
 
 });
-
 
 module.exports = router;
