@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Style.css";
 import Sidebar from "../Components/Sidebar";
-import Header from "../Components/Header";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Scanner from "./Scanner"
@@ -98,7 +97,6 @@ function BreedPair() {
     <div className="main-div">
       <Sidebar />
       <div className="breed-pair-div">
-        <Header />
         <br />
         <h1>Add Rabbit Pair</h1>
         <br />

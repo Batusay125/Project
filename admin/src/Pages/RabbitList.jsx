@@ -4,7 +4,6 @@ import "./Style.css";
 import Table from "react-bootstrap/Table";
 import Sidebar from "../Components/Sidebar";
 import { Link } from "react-router-dom";
-import Header from "../Components/Header";
 import { toast } from "react-toastify";
 import { FiEdit } from "react-icons/fi";
 import { BsSend } from "react-icons/bs";
@@ -49,8 +48,6 @@ function RabbitList() {
     <div className="main-div">
       <Sidebar />
       <div className="rabbitList">
-        <Header />
-        <br />
         <h1>Rabbit List</h1>
         <br />
         <div className="search-filter-div">
@@ -73,7 +70,7 @@ function RabbitList() {
         </div>
         <Table striped bordered hover>
           <thead>
-            <tr>
+            <tr style={{height: "60px"}}>
               <th>ID</th>
               <th>Profile</th>
               <th>Name</th>
@@ -85,7 +82,7 @@ function RabbitList() {
           </thead>
           <tbody>
             {record.map((data, i) => (
-              <tr key={i}>
+              <tr key={i} style={{height: "50px"}}>
                 <td>{data.id}</td>
                 <td>Img</td>
                 <td>{data.name}</td>

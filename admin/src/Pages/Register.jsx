@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
-import { FaUserShield } from "react-icons/fa";
-import { BsFillShieldLockFill } from "react-icons/bs";
-import { AiOutlineSwapRight } from "react-icons/ai";
-import { MdOutlineAlternateEmail } from "react-icons/md";
+import { AiOutlineMail } from "react-icons/ai";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { BiUser } from "react-icons/bi";
 
 const Register = () => {
   //holds the input
@@ -48,7 +47,7 @@ const Register = () => {
           <div className="inputDiv">
             <label htmlFor="username">Name</label>
             <div className="input flex">
-              <FaUserShield className="icons" />
+              <BiUser className="icons" />
               <input
                 type="text"
                 id="username"
@@ -63,7 +62,7 @@ const Register = () => {
           <div className="inputDiv">
             <label htmlFor="email">Email</label>
             <div className="input flex">
-              <MdOutlineAlternateEmail className="icons" />
+              <AiOutlineMail className="icons" />
               <input
                 type="email"
                 id="email"
@@ -79,7 +78,7 @@ const Register = () => {
           <div className="inputDiv">
             <label htmlFor="password">Password</label>
             <div className="input flex">
-              <BsFillShieldLockFill className="icons" />
+              <RiLockPasswordLine className="icons" />
               <input
                 type="password"
                 id="password"
@@ -94,17 +93,13 @@ const Register = () => {
 
           <button
             type="submit"
-            className="btn register-btn flex"
+            className="register-btn"
             onClick={createUser}
           >
             <span>Sign up</span>
-            <AiOutlineSwapRight className="icon" />
           </button>
           <div>
             Already have an account? <Link to="/">Login</Link>
-          </div>
-          <div>
-            <Link>Sign up as guest</Link>
           </div>
         </form>
       </div>

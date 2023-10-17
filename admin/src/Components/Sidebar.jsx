@@ -25,7 +25,6 @@ function Sidebar() {
     <div className="sidebar">
       <Logo />
       <ul>
-        <h4>Quick Menu</h4>
         <li>
           <AiOutlineDashboard className="icons" />
           <Link to="/dashboard">Dashboard</Link>
@@ -37,12 +36,6 @@ function Sidebar() {
         <li>
           <BsListCheck className="icons" />
           <Link to="/rabbitlist">Rabbit List</Link>
-        </li>
-        <br />
-        <h4>Setting</h4>
-        <li>
-          <BsBarChartLine className="icons" />
-          <Link to="/chart">Charts</Link>
         </li>
         <li>
           <GiRabbit className="icons" />

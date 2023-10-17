@@ -3,9 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-html {
-    font-size: 90%;
-}
 button {
     background-color: transparent;
     border: none;
@@ -71,7 +68,7 @@ button {
     position: absolute;
     right: 0;
     top: 0;
-    width: 85%;
+    width: 82%;
     padding: 30px;
 }
 
@@ -132,6 +129,10 @@ button {
 }
 
 /* Breeding.jsx */
+.breeding-div table th {
+    background-color: #00828c;
+    color: #fff;
+}
 .breed-btn {
     margin-bottom: 20px;
 }

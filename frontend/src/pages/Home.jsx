@@ -39,20 +39,12 @@ function Home() {
               tomorrow for them in every possible way.
             </h4>
             <br />
-            <h4>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Necessitatibus animi saepe obcaecati atque illo tempore et nostrum
-              alias explicabo sunt, maxime temporibus enim laboriosam ipsam modi
-              eaque voluptas dolores iure.
-            </h4>
-          </div>
-          <div>
             <h2 className="related-business">Related Businessess:</h2>
             <br />
             <h5>Rice Farming</h5>
             <img src={Img1} alt="" />
-            <br />
-            <br />
+          </div>
+          <div>
             <h5>Santol Plants</h5>
             <img src={Img2} alt="" />
             <br />

@@ -24,4 +24,14 @@ router.post("/pair-rabbit", (req, res) => {
   });
 });
 
+router.delete("/cancel_breeding/:id", (req, res) => {
+  const id = req.params.id;
+  db.query("DELETE FROM breeding_pair WHERE id = ?", [id], (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    res.json(result);
+  });
+});
+
 module.exports = router;

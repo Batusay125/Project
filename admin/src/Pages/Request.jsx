@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import "./Style.css";
-import Header from "../Components/Header";
 import { Table } from "react-bootstrap";
 import axios from "axios";
-
 import appConfig from "../../config.json";
+import { Link } from "react-router-dom";
+import ReviewRequest from "./ReviewRequest";
+
 const BASE_URL = appConfig.apiBasePath;
-
-
-
 const onApprove = (e, o) =>{
   axios
   .put(BASE_URL + "/approve-adoption/" + o.id)
@@ -32,12 +30,10 @@ function Request() {
     <div className="main-div">
       <Sidebar />
       <div className="request-div">
-        <Header />
-        <br />
         <h1>Request</h1>
         <Table striped bordered hover>
-          <thead>
-            <tr>
+          <thead >
+            <tr style={{height: "60px"}}>
               <th>Application Id</th>
               <th>Rabbit Id</th>
               <th>Adopter Name</th>
@@ -50,7 +46,7 @@ function Request() {
           </thead>
           <tbody>
             {values.map((data, i) => (
-              <tr key={i}>
+              <tr key={i} style={{height: "50px"}}>
                 <td>{data.id}</td>
                 <td>{data.rabbit_id}</td>
                 <td>{data.fullname}</td>
@@ -61,7 +57,7 @@ function Request() {
                 <td>{data.reason_for_adoption}</td>
                 <td>{data.transaction_status}</td>
                 <td className="actions">
-                  <button className="secondary">Review</button>
+                  <ReviewRequest data={data}/>
                   <button className="success" onClick={e => onApprove(e, data)}>Approve</button>
                   <button className="danger">Decline</button>
                 </td>

@@ -26,13 +26,11 @@ import "react-toastify/dist/ReactToastify.css";
 import Chart from "./Pages/Chart";
 import CreateNewPass from "./Pages/CreateNewPass";
 import Breeding from "./Pages/Breeding";
-
-
 export const AuthContext = createContext(null);
 import SecureStore from "react-secure-storage";
-import BreedingData from "./Pages/BreedingData";
 import AddBreedPair from "./Pages/AddBreedPair";
 import Request from "./Pages/Request";
+import ReviewRequest from "./Pages/ReviewRequest";
 
 function App() {
   const signIn = useContext(AuthContext);
@@ -118,14 +116,6 @@ function App() {
       ),
     },
     {
-      path: "/breed-data",
-      element: (
-        <div>
-          <BreedingData />
-        </div>
-      ),
-    },
-    {
       path: "/add-breed-pair",
       element: (
         <div>
@@ -138,6 +128,14 @@ function App() {
       element: (
         <div>
           <Request />
+        </div>
+      ),
+    },
+    {
+      path: "/review_request",
+      element: (
+        <div>
+          <ReviewRequest />
         </div>
       ),
     },

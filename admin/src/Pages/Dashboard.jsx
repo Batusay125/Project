@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "../Components/Sidebar.jsx";
 import "./dashboard.css";
-import Header from "../Components/Header.jsx";
 import SecureStore from "react-secure-storage";
 import { useEffect } from "react";
 import axios from "axios";
@@ -41,9 +40,8 @@ function Dashboard() {
     <div className="main-div">
       <Sidebar />
       <div className="dashboard-div">
-        <Header />
-        <br />
         <h1>Dashboard</h1>
+        <br/>
         {/* <h1>Welcome {user !== null ? user.name : ""}</h1> */}
         <div
           style={{

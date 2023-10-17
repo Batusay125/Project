@@ -4,7 +4,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../Components/Sidebar";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Header from "../Components/Header.jsx";
 import QRCode from "react-qr-code";
 
 import appConfig from "../../config.json";
@@ -52,8 +51,6 @@ function EditRabbit() {
     <div className="main-div">
       <Sidebar />
       <div className="addRabbit-div">
-        <Header />
-        <br />
         <h1>Edit Rabbit</h1>
         <form className="form" onSubmit={handleSubmit}>
           <label htmlFor="">Name :</label>

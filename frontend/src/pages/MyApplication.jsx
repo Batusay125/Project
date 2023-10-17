@@ -57,7 +57,7 @@ function MyApplication() {
                       {data.transaction_status}
                     </span>
                   ) : (
-                    <span style={{ color: "red" }}>
+                    <span style={{ color: "black" }}>
                       {data.transaction_status}
                     </span>
                   )}

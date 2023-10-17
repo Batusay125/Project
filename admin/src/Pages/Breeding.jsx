@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../Components/Sidebar";
-import Header from "../Components/Header";
 import "./Style.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { AiOutlineDatabase } from "react-icons/ai";
 import axios from "axios";
-
 import appConfig from "../../config.json";
+import BreedingDetails from "./BreedingDetails";
 const BASE_URL = appConfig.apiBasePath;
 
 function Breeding() {
+  const { id } = useParams();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -22,12 +22,20 @@ function Breeding() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(BASE_URL + "/cancel_breeding/" + id);
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="main-div">
       <Sidebar />
       <div className="breeding-div">
-        <Header />
-        <br />
         <h1>Breeding Pair List</h1>
         <br />
         <div className="d-flex">
@@ -39,8 +47,8 @@ function Breeding() {
           </Link>
         </div>
         <Table striped bordered hover>
-          <thead>
-            <tr>
+          <thead >
+            <tr style={{height: "60px"}}>
               <th>Pair Id</th>
               <th>Buck</th>
               <th>Doe</th>
@@ -50,19 +58,14 @@ function Breeding() {
           </thead>
           <tbody>
             {data.map((data, i) => (
-              <tr key={i}>
+              <tr key={i} style={{height: "50px"}}>
                 <td>{data.id}</td>
                 <td>{data.buck_id}</td>
                 <td>{data.doe_id}</td>
                 <td>{data.pairing_date}</td>
                 <td className="actions">
-                  <Link
-                    to="/breed-data"
-                    className="secondary text-decoration-none"
-                  >
-                    View
-                  </Link>
-                  <button className="danger">Delete</button>
+                  <BreedingDetails data={data}/>
+                  <button className="danger" onClick={(e) => handleDelete(data.id)}>Cancel</button>
                 </td>
               </tr>
             ))}
