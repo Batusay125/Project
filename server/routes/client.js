@@ -1,6 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/db");
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+
+  destination: function (req, file, cb) {
+    cb(null, "uploads/")
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+const upload = multer({ storage: storage });
+
 
 router.post("/signup", (req, res) => {
   const email = req.body.email;
@@ -117,25 +130,31 @@ router.post("/addrabbit", (req, res) => {
 //end
 
 //Adopt Form
-router.post("/rabbitdata/:id/adopt-form", (req, res) => {
+router.post("/rabbitdata/:id/adopt-form", upload.single("image"), (req, res) => {
+  console.log("adopt-form");
+  console.log(req.file);
+  const result = JSON.parse(req.body.values);
+  console.log(result.email);
+
   const values = [
-    req.body.rabbit_id,
-    req.body.date,
-    req.body.fullname,
-    req.body.email,
-    req.body.phone,
-    req.body.province,
-    req.body.city,
-    req.body.barangay,
-    req.body.postalcode,
-    req.body.reason,
-    req.body.otherpets,
-    req.body.user_id,
-    req.body.transaction_status
+    result.rabbit_id,
+    result.date,
+    result.fullname,
+    result.email,
+    result.phone,
+    result.province,
+    result.city,
+    result.barangay,
+    result.postalcode,
+    result.reason,
+    result.otherpets,
+    result.user_id,
+    result.transaction_status,
+    req.file.filename
   ];
-  console.log(values);
+
   const sql =
-    "INSERT INTO adoption (`rabbit_id`, `adoption_date`, `fullname`, `email`, `phone`, `province`, `city`, `barangay`, `postal_code`, `reason_for_adoption`, `other_pets`, `user_id`, `transaction_status`) VALUES (?)";
+    "INSERT INTO adoption (`rabbit_id`, `adoption_date`, `fullname`, `email`, `phone`, `province`, `city`, `barangay`, `postal_code`, `reason_for_adoption`, `other_pets`, `user_id`, `transaction_status`, `home_environment_image_path`) VALUES (?)";
   db.query(sql, [values], (error, results) => {
     if (error) {
       console.log(error);

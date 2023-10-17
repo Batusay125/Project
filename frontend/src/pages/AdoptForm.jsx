@@ -6,11 +6,20 @@ import { Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import SecureStore from "react-secure-storage";
 
+
+
 function AdoptForm() {
   const { id, name } = useParams();
   const navigateTo = useNavigate();
   const date = new Date().toLocaleDateString();
   const user = SecureStore.getItem("userToken");
+  const [file, setFile] = useState();
+  const[img, setImg] = useState();
+  
+  const onFileChange = e => {
+    setImg(e.target.files[0]);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  };
 
   const [values, setValues] = useState({
     rabbit_id: id,
@@ -33,8 +42,14 @@ function AdoptForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  
+    const formData = new FormData();
+    formData.append('image', img);
+    const postData = JSON.stringify(values);
+    formData.append('values', postData);
+
     axios
-      .post("http://localhost:8081/rabbitdata/" + id + "/adopt-form", values)
+      .post("http://localhost:8081/rabbitdata/" + id + "/adopt-form", formData)
       .then((res) => {
         console.log(res);
         toast.success("Application sent!");
@@ -46,7 +61,7 @@ function AdoptForm() {
     <div className="main-div">
       <Navbar />
       <div className="form-div">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
           <h4>Adoption Application for {name}</h4>
           <br />
           <label htmlFor="fullname">
@@ -128,7 +143,7 @@ function AdoptForm() {
               type="text"
               name="postalcode"
               placeholder="Postal code"
-              className=" form-control"
+              className="form-control"
               onChange={handleInput}
               required
             />
@@ -139,8 +154,16 @@ function AdoptForm() {
           <label htmlFor="environment">
             Home environment <span className="errmsg">*</span>
           </label>
-          <input type="file" className="form-control" />
+          <input 
+          type="file" 
+          name="image" 
+          className="form-control"
+          id = "image"
+           onChange={onFileChange} />
           <br />
+          <img src={file} />
+          {/* {fileData()} */}
+
           <label htmlFor="reason">
             Reason for Adoption <span className="errmsg">*</span>
             <textarea
