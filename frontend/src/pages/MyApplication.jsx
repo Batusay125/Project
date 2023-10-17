@@ -40,6 +40,7 @@ function MyApplication() {
               <th>Rabbit_Id</th>
               <th>Application date</th>
               <th>Reason for adoption</th>
+              <th>Service Option</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -51,6 +52,7 @@ function MyApplication() {
                 <td>{data.rabbit_id}</td>
                 <td width={100}>{data.adoption_date}</td>
                 <td>{data.reason_for_adoption}</td>
+                <td width={100}>{data.service_option}</td>
                 <td width={100}>
                   {data.transaction_status === "COMPLETE" ? (
                     <span style={{ color: "green" }}>
@@ -64,9 +66,15 @@ function MyApplication() {
                 </td>
                 <td className="action-btn">
                   <ViewApplication data={data} />
-                  <button class="danger" onClick={(e) => handleDelete(data.id)}>
-                    Cancel
-                  </button>
+                  {data.transaction_status === "PENDING" ? (
+                    <button class="danger" onClick={(e) => handleDelete(data.id)}>
+                      Cancel
+                    </button>
+                  ) : (
+                    <span style={{ color: "black" }}>
+                    </span>
+                  )}
+
                 </td>
               </tr>
             ))}

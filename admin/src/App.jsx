@@ -1,9 +1,9 @@
 import {
-createContext,
-useMemo,
-useEffect,
-useReducer,
-useContext,
+  createContext,
+  useMemo,
+  useEffect,
+  useReducer,
+  useContext,
 } from "react";
 import "./App.css";
 import {
@@ -31,6 +31,7 @@ import SecureStore from "react-secure-storage";
 import AddBreedPair from "./Pages/AddBreedPair";
 import Request from "./Pages/Request";
 import ReviewRequest from "./Pages/ReviewRequest";
+import PrivateRoute from "./Pages/PrivateRoute";
 
 function App() {
   const signIn = useContext(AuthContext);
@@ -63,7 +64,10 @@ function App() {
       path: "/dashboard",
       element: (
         <div>
-          <Dashboard />
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+
         </div>
       ),
     },
@@ -71,7 +75,10 @@ function App() {
       path: "/delivery",
       element: (
         <div>
-          <Delivery />
+          <PrivateRoute>
+            <Delivery />
+          </PrivateRoute>
+
         </div>
       ),
     },
@@ -79,7 +86,10 @@ function App() {
       path: "/rabbitlist",
       element: (
         <div>
-          <RabbitList />
+          <PrivateRoute>
+            <RabbitList />
+          </PrivateRoute>
+
         </div>
       ),
     },
@@ -87,7 +97,9 @@ function App() {
       path: "/add-rabbit",
       element: (
         <div>
-          <AddRabbit />
+          <PrivateRoute>
+            <AddRabbit />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -96,6 +108,9 @@ function App() {
       element: (
         <div>
           <EditRabbit />
+          <PrivateRoute>
+            <EditRabbit />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -103,7 +118,9 @@ function App() {
       path: "/chart",
       element: (
         <div>
-          <Chart />
+          <PrivateRoute>
+            <Chart />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -111,7 +128,9 @@ function App() {
       path: "/breeding",
       element: (
         <div>
-          <Breeding />
+          <PrivateRoute>
+            <Breeding />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -119,7 +138,9 @@ function App() {
       path: "/add-breed-pair",
       element: (
         <div>
-          <AddBreedPair />
+          <PrivateRoute>
+            <AddBreedPair />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -127,7 +148,9 @@ function App() {
       path: "/request",
       element: (
         <div>
-          <Request />
+          <PrivateRoute>
+            <Request />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -135,7 +158,9 @@ function App() {
       path: "/review_request",
       element: (
         <div>
-          <ReviewRequest />
+          <PrivateRoute>
+            <ReviewRequest />
+          </PrivateRoute>
         </div>
       ),
     },

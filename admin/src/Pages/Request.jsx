@@ -3,11 +3,11 @@ import Sidebar from "../Components/Sidebar";
 import "./Style.css";
 import { Table } from "react-bootstrap";
 import axios from "axios";
-import appConfig from "../../config.json";
 import { Link } from "react-router-dom";
 import ReviewRequest from "./ReviewRequest";
-
+import appConfig from "../../config.json";
 const BASE_URL = appConfig.apiBasePath;
+
 const onApprove = (e, o) =>{
   axios
   .put(BASE_URL + "/approve-adoption/" + o.id)
@@ -40,6 +40,7 @@ function Request() {
               <th>Adopter Address</th>
               <th>Application Date</th>
               <th>Reason to adopt</th>
+              <th>Service Option</th>
               <th>Tran. Status</th>
               <th>Action</th>
             </tr>
@@ -55,10 +56,11 @@ function Request() {
                 </td>
                 <td>{data.adoption_date}</td>
                 <td>{data.reason_for_adoption}</td>
+                <td>{data.service_option}</td>
                 <td>{data.transaction_status}</td>
                 <td className="actions">
                   <ReviewRequest data={data}/>
-                  <button className="success" onClick={e => onApprove(e, data)}>Approve</button>
+                  <button className="success" onClick={e => onApprove(e, data)}>Approve Request</button>
                   <button className="danger">Decline</button>
                 </td>
               </tr>

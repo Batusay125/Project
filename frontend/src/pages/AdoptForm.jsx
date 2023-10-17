@@ -14,8 +14,8 @@ function AdoptForm() {
   const date = new Date().toLocaleDateString();
   const user = SecureStore.getItem("userToken");
   const [file, setFile] = useState();
-  const[img, setImg] = useState();
-  
+  const [img, setImg] = useState();
+
   const onFileChange = e => {
     setImg(e.target.files[0]);
     setFile(URL.createObjectURL(e.target.files[0]));
@@ -34,7 +34,8 @@ function AdoptForm() {
     reason: "",
     otherpets: "",
     user_id: user.id,
-    transaction_status: "PENDING"
+    transaction_status: "PENDING",
+    serviceoption: "",
   });
   const handleInput = (e) => {
     setValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
@@ -42,7 +43,7 @@ function AdoptForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     const formData = new FormData();
     formData.append('image', img);
     const postData = JSON.stringify(values);
@@ -152,14 +153,35 @@ function AdoptForm() {
           <hr />
           <br />
           <label htmlFor="environment">
+            <span className="errmsg">*</span>
+          </label>
+
+          <label htmlFor="serviceoption">
+            Service Option <span className="errmsg">*</span>
+          </label>
+          <Form.Select
+            aria-label="Default select example"
+            onChange={handleInput}
+            name="serviceoption"
+            required
+          >
+             <option value="" hidden>
+                Choose
+              </option>
+            <option value="Pick up">Pick up</option>
+            <option value="Deliver">Deliver</option>
+          </Form.Select>
+          <br />
+
+          <label htmlFor="environment">
             Home environment <span className="errmsg">*</span>
           </label>
-          <input 
-          type="file" 
-          name="image" 
-          className="form-control"
-          id = "image"
-           onChange={onFileChange} />
+          <input
+            type="file"
+            name="image"
+            className="form-control"
+            id="image"
+            onChange={onFileChange} />
           <br />
           <img src={file} />
           {/* {fileData()} */}

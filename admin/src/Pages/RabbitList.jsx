@@ -16,6 +16,27 @@ function RabbitList() {
   const [rabbits, setRabbits] = useState([]);
   const [record, setRecord] = useState([]);
 
+  const onRehome = (e, o) => {
+    axios
+      .put(BASE_URL + "/update-rehome/" + o.id, {
+        rehome: "REHOME"
+      })
+      .then((res) => {
+        window.location.reload();
+      }).catch((err) => console.log(err));
+  }
+
+  const onUnRehome = (e, o) => {
+    axios
+      .put(BASE_URL + "/update-rehome/" + o.id, {
+        rehome: null
+      })
+      .then((res) => {
+        window.location.reload();
+      }).catch((err) => console.log(err));
+  }
+
+
   useEffect(() => {
     axios
       .get(BASE_URL + "/rabbits")
@@ -70,25 +91,27 @@ function RabbitList() {
         </div>
         <Table striped bordered hover>
           <thead>
-            <tr style={{height: "60px"}}>
+            <tr style={{ height: "60px" }}>
               <th>ID</th>
               <th>Profile</th>
               <th>Name</th>
               <th>Age</th>
               <th>Sex</th>
               <th>Weight</th>
+              <th>Rehome</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {record.map((data, i) => (
-              <tr key={i} style={{height: "50px"}}>
+              <tr key={i} style={{ height: "50px" }}>
                 <td>{data.id}</td>
                 <td>Img</td>
                 <td>{data.name}</td>
                 <td>{data.age}</td>
                 <td>{data.sex}</td>
                 <td>{data.weight}</td>
+                <td>{data.rehome}</td>
                 <td className="actions">
                   <Link
                     to={`/edit-rabbit/${data.id}`}
@@ -96,7 +119,17 @@ function RabbitList() {
                   >
                     Edit
                   </Link>
-                  <button className="primary">Rehome</button>
+
+
+
+                  {data.rehome === "REHOME" ? (
+                    <button className="primary" onClick={e => onUnRehome(e, data)}>UnRehome</button>
+                  ) : (
+                    <button className="primary" onClick={e => onRehome(e, data)}>Rehome</button>
+
+                  )}
+
+
                   <button
                     className="danger"
                     onClick={(e) => handleDelete(data.id)}

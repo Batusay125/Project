@@ -93,7 +93,7 @@ function verifyToken(req, res, next) {
 
 // Adopt
 router.get("/adopt", (req, res) => {
-  db.query("SELECT * FROM rabbit", (err, results) => {
+  db.query("SELECT * FROM rabbit WHERE rehome = 'REHOME'", (err, results) => {
     if (err) {
       console.error("Error fetching rabbits:", err);
       res.status(500).json({ error: "Internal Server Error" });
@@ -134,7 +134,7 @@ router.post("/rabbitdata/:id/adopt-form", upload.single("image"), (req, res) => 
   console.log("adopt-form");
   console.log(req.file);
   const result = JSON.parse(req.body.values);
-  console.log(result.email);
+  console.log(result);
 
   const values = [
     result.rabbit_id,
@@ -150,11 +150,12 @@ router.post("/rabbitdata/:id/adopt-form", upload.single("image"), (req, res) => 
     result.otherpets,
     result.user_id,
     result.transaction_status,
-    req.file.filename
+    req.file.filename,
+    result.serviceoption
   ];
 
   const sql =
-    "INSERT INTO adoption (`rabbit_id`, `adoption_date`, `fullname`, `email`, `phone`, `province`, `city`, `barangay`, `postal_code`, `reason_for_adoption`, `other_pets`, `user_id`, `transaction_status`, `home_environment_image_path`) VALUES (?)";
+    "INSERT INTO adoption (`rabbit_id`, `adoption_date`, `fullname`, `email`, `phone`, `province`, `city`, `barangay`, `postal_code`, `reason_for_adoption`, `other_pets`, `user_id`, `transaction_status`, `home_environment_image_path`, `service_option`) VALUES (?)";
   db.query(sql, [values], (error, results) => {
     if (error) {
       console.log(error);

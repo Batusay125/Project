@@ -12,6 +12,8 @@ function DropdownMenu() {
   const navigate = useState();
   const authContext = useContext(AuthContext);
 
+  const user = SecureStore.getItem("userToken");
+
   const handleLogout = () => {
     // Remove secure storage
     SecureStore.clear();
@@ -23,6 +25,7 @@ function DropdownMenu() {
   return (
     <div className="dropdown">
       <ul className="">
+        <h3>{user.name}</h3>
         <Link to="/myapplication">
           <AiOutlineForm className="icon icons" />
           My application
