@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar.jsx";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Rabbit1 from "../images/rabbit-contact.png";
 import "./style.css";
 import axios from "axios";
 import RabbitData from "./RabbitData.jsx";
@@ -13,6 +12,8 @@ import AboutRabbit from "./AboutRabbit.jsx";
 function Adopt() {
   const [rabbits, setRabbits] = useState([]);
   const [record, setRecord] = useState([]);
+  const photo = "http://localhost:8081/";
+  
 
   useEffect(() => {
     axios
@@ -43,7 +44,7 @@ function Adopt() {
         <div className="rabbitList">
           {record.map((data, i) => (
             <Card key={i} style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={data.image_path} height={250} alt="No Image"/>
+              <Card.Img variant="top" src= {`http://localhost:8081/uploads/${data.image_path}`} height={250} alt="No Image"/> 
               <Card.Body style={{ backgroundColor: "#00828c", color: "#fff" }}>
                 <Card.Title>{data.name}</Card.Title>
                 <Card.Text>
