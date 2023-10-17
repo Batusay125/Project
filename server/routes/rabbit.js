@@ -89,6 +89,23 @@ router.put("/update-rabbit/:id", (req, res) => {
   });
 });
 
+router.put("/update-rehome/:id", (req, res) => {
+  console.log("uppppppppppppppp");
+  console.log(req.body);
+  const sql =
+    "UPDATE rabbit SET `rehome` = ? WHERE id = ?";
+  const values = [req.body.rehome];
+  const id = req.params.id;
+
+  db.query(sql, [...values, id], (err, data) => {
+    if (err) {
+      return res.json("Error");
+    }
+    return res.json(data);
+  });
+});
+
+
 //DeleteMapping
 router.delete("/delete-rabbit/:id", (req, res) => {
   const id = req.params.id;
