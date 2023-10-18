@@ -11,14 +11,36 @@ const BASE_URL = appConfig.apiBasePath;
 function Dashboard() {
   const user = SecureStore.getItem("userToken");
 
+  const [userCount, setUserCount] = useState(0);
+  const [requestCount, setRequestCount] = useState(0);
   const [rabbitCount, setRabbitCount] = useState(0);
   const [pending, setPending] = useState(0);
+  const [pairCount, setPairCount] = useState(0);
+  const [approveCount, setApproveRequest] = useState(0);
 
   useEffect(() => {
     axios
-      .get("/countRabbits")
+      .get(BASE_URL + "/userCount")
       .then((response) => {
-        setRabbitCount(response.data.count);
+        setUserCount(response.data[0].userCount);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    axios
+      .get(BASE_URL + "/requestCount")
+      .then((response) => {
+        setRequestCount(response.data[0].requestCount);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    axios
+      .get(BASE_URL + "/countRabbits")
+      .then((response) => {
+        setRabbitCount(response.data[0].rabbitCount);
       })
       .catch((error) => {
         console.error(error);
@@ -29,6 +51,32 @@ function Dashboard() {
       .get(BASE_URL +"/pending-adoption")
       .then((response) => {
         setPending(response.data[0].pending);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    axios
+      .get(BASE_URL +"/pairCount")
+      .then((response) => {
+        setPairCount(response.data[0].pairCount);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    axios
+      .get(BASE_URL +"/approveCount")
+      .then((response) => {
+        setApproveRequest(response.data[0].approveCount);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    axios
+      .get(BASE_URL +"/pairCount")
+      .then((response) => {
+        setPairCount(response.data[0].pairCount);
       })
       .catch((error) => {
         console.error(error);
@@ -60,7 +108,7 @@ function Dashboard() {
             }}
           >
             <h4>Users</h4>
-            <h1>129</h1>
+            <h1>{userCount}</h1>
           </div>
           <div
             className="dashboard-card bg-success"
@@ -71,7 +119,7 @@ function Dashboard() {
             }}
           >
             <h4>Total Request</h4>
-            <h1>100</h1>
+            <h1>{requestCount}</h1>
           </div>
           <div
             className="dashboard-card bg-warning"
@@ -94,7 +142,7 @@ function Dashboard() {
             }}
           >
             <h4>Breeding Pair</h4>
-            <h1>20</h1>
+            <h1>{pairCount}</h1>
           </div>
           <div
             className="dashboard-card bg-info"
@@ -105,7 +153,7 @@ function Dashboard() {
             }}
           >
             <h4>Rabbits</h4>
-            <h1>150</h1>
+            <h1>{rabbitCount}</h1>
           </div>
           <div
             className="dashboard-card bg-primary"
@@ -115,8 +163,8 @@ function Dashboard() {
               alignContent: "center",
             }}
           >
-            <h4>Active Users</h4>
-            <h1>250</h1>
+            <h4>Approved Request</h4>
+            <h1>{approveCount}</h1>
           </div>
         </div>
       </div>
