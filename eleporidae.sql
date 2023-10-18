@@ -19,6 +19,9 @@
 -- Table structure for table `adoption`
 --
 
+
+
+
 DROP TABLE IF EXISTS `adoption`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -40,7 +43,7 @@ CREATE TABLE `adoption` (
   `home_environment_image_path` varchar(255) DEFAULT NULL,
   `service_option` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +69,7 @@ CREATE TABLE `breeding_pair` (
   `doe_id` int NOT NULL,
   `pairing_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +117,6 @@ DROP TABLE IF EXISTS `rabbit`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rabbit` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `image` blob NOT NULL,
   `name` varchar(20) NOT NULL,
   `age` int NOT NULL,
   `sex` varchar(10) NOT NULL,
@@ -122,7 +124,7 @@ CREATE TABLE `rabbit` (
   `image_path` varchar(255) DEFAULT NULL,
   `rehome` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +133,7 @@ CREATE TABLE `rabbit` (
 
 LOCK TABLES `rabbit` WRITE;
 /*!40000 ALTER TABLE `rabbit` DISABLE KEYS */;
-INSERT INTO `rabbit` VALUES (1,'','Totoro',2,'female',4,'./rabbit-contact.png','REHOME'),(2,'','Loki',11,'male',2,'rabbit-about.png','REHOME'),(3,'','Gerald',8,'male',2,'LoginRabbit.jpg','REHOME'),(5,'','Nomi',6,'female',3,'rabbit-about.png',NULL),(6,'','Snow',9,'female',1,'1234.png',NULL),(7,'','Harold',8,'male',2,NULL,NULL),(8,'','Jacob',5,'male',1,NULL,NULL),(67,'','Mikey',14,'female',4,NULL,NULL);
+INSERT INTO `rabbit` VALUES (1,'Totoro',2,'female',4,'./rabbit-contact.png','REHOME'),(2,'Loki',11,'male',2,'rabbit-about.png','REHOME'),(3,'Gerald',8,'male',2,'LoginRabbit.jpg','REHOME'),(5,'Nomi',6,'female',3,'rabbit-about.png',NULL),(6,'Snow',9,'female',1,'1234.png',NULL),(7,'Harold',8,'male',2,NULL,NULL),(8,'Jacob',5,'male',1,NULL,NULL),(67,'Mikey',14,'female',4,NULL,NULL),(68,'daisy',2,'female',10,'daisy.jpg',NULL),(69,'daisyson',3,'male',3,'daisy.jpg',NULL);
 /*!40000 ALTER TABLE `rabbit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +148,7 @@ CREATE TABLE `upload` (
   `id` int NOT NULL AUTO_INCREMENT,
   `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +174,7 @@ CREATE TABLE `user` (
   `email` varchar(50) NOT NULL,
   `password` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,4 +196,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-18  8:17:51
+-- Dump completed on 2023-10-18  9:22:53
