@@ -2,13 +2,33 @@ const express = require("express");
 const router = express.Router();
 const db = require("../config/db");
 const multer = require('multer');
+
+const storage = multer.diskStorage({
+
+  destination: function (req, file, cb) {
+    cb(null, "uploads/")
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+const upload = multer({ storage: storage });
+
 //PostMapping
-router.post("/add-rabbit", (req, res) => {
-  const sql = "INSERT INTO rabbit (`name`, `age`, `sex`, `weight`) VALUES (?)";
-  const values = [req.body.name, req.body.age, req.body.sex, req.body.weight];
+router.post("/add-rabbit", upload.single("image"), (req, res) => {
+  console.log("add-rabbit");
+  console.log(req.file);
+  const result = JSON.parse(req.body.values);
+  console.log(result);
+  console.log(req.file.filename);
+
+
+  const sql = "INSERT INTO rabbit (`name`, `age`, `sex`, `weight`, `image_path`) VALUES (?)";
+  const values = [result.name, result.age, result.sex, result.weight, req.file.filename];
 
   db.query(sql, [values], (err, data) => {
     if (err) {
+      console.log(err);
       return res.json("Error");
     }
     return res.json(data);
@@ -118,17 +138,6 @@ router.delete("/delete-rabbit/:id", (req, res) => {
 });
 
 
-
-const storage = multer.diskStorage({
-
-  destination: function (req, file, cb) {
-    cb(null, "uploads/")
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname)
-  }
-})
-const upload = multer({ storage: storage });
 
 router.post("/upload-file", upload.single("image"), (req, res) => {
   console.log(req.file.filename);
