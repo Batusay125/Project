@@ -22,6 +22,8 @@ import {
 } from "react";
 export const AuthContext = createContext(null);
 import SecureStore from "react-secure-storage";
+import SimpleChat from "./pages/SimpleChat.jsx";
+import PrivateRoute from "./pages/PrivateRoute";
 
 function App() {
   const router = createBrowserRouter([
@@ -45,7 +47,9 @@ function App() {
       path: "/home",
       element: (
         <div>
-          <Home />
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -53,7 +57,9 @@ function App() {
       path: "/adopt",
       element: (
         <div>
-          <Adopt />
+          <PrivateRoute>
+            <Adopt />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -61,7 +67,9 @@ function App() {
       path: "/contact",
       element: (
         <div>
-          <Contact />
+          <PrivateRoute>
+            <Contact />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -69,7 +77,9 @@ function App() {
       path: "/about",
       element: (
         <div>
-          <About />
+          <PrivateRoute>
+            <About />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -77,7 +87,9 @@ function App() {
       path: "/myapplication",
       element: (
         <div>
-          <MyApplication />
+          <PrivateRoute>
+            <MyApplication />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -85,7 +97,10 @@ function App() {
       path: "/rabbitdata/:name/:id/adopt-form",
       element: (
         <div>
-          <AdoptForm />
+          <PrivateRoute>
+            <AdoptForm />
+          </PrivateRoute>
+          
         </div>
       ),
     },
@@ -93,7 +108,9 @@ function App() {
       path: "/newform",
       element: (
         <div>
-          <NewForm />
+          <PrivateRoute>
+            <NewForm />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -101,7 +118,9 @@ function App() {
       path: "/rabbitdata/:id",
       element: (
         <div>
-          <RabbitData />
+           <PrivateRoute>
+            <RabbitData />
+           </PrivateRoute>
         </div>
       ),
     },
@@ -109,7 +128,9 @@ function App() {
       path: "/addrabbit",
       element: (
         <div>
-          <AddRabbit />
+          <PrivateRoute>
+            <AddRabbit />
+          </PrivateRoute>
         </div>
       ),
     },
@@ -117,7 +138,17 @@ function App() {
       path: "/adopt/:id",
       element: (
         <div>
-          <AboutRabbit />
+          <PrivateRoute>
+            <AboutRabbit />
+          </PrivateRoute>
+        </div>
+      ),
+    },
+    {
+      path: "/chat",
+      element: (
+        <div>
+          <SimpleChat />
         </div>
       ),
     },
