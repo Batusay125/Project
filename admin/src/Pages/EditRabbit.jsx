@@ -53,6 +53,11 @@ function EditRabbit() {
       <div className="addRabbit-div">
         <h1>Edit Rabbit</h1>
         <form className="form" onSubmit={handleSubmit}>
+        <label htmlFor="">Image:</label>
+          <br />
+          <img style={{width: "300px", height: "300px"}} src={`http://localhost:8081/uploads/${values.image_path}`} />
+          <br />
+
           <label htmlFor="">Name :</label>
           <input
             type="text"
@@ -96,6 +101,9 @@ function EditRabbit() {
             required
           />
           <br />
+
+          
+
           <label htmlFor="">Code :</label>
           <div className="App">
             {value && (

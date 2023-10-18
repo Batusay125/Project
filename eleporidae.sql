@@ -80,6 +80,32 @@ INSERT INTO `breeding_pair` VALUES (1,23,52,'2023-10-16'),(2,2,5,'2023-10-16'),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `chat`
+--
+
+DROP TABLE IF EXISTS `chat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `chat` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `message` varchar(255) DEFAULT NULL,
+  `user_id` int NOT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chat`
+--
+
+LOCK TABLES `chat` WRITE;
+/*!40000 ALTER TABLE `chat` DISABLE KEYS */;
+INSERT INTO `chat` VALUES (1,'hello world',1,'Admin');
+/*!40000 ALTER TABLE `chat` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `rabbit`
 --
 
@@ -105,7 +131,7 @@ CREATE TABLE `rabbit` (
 
 LOCK TABLES `rabbit` WRITE;
 /*!40000 ALTER TABLE `rabbit` DISABLE KEYS */;
-INSERT INTO `rabbit` VALUES (1,'','Totoro',2,'female',4,'./rabbit-contact.png','REHOME'),(2,'','Loki',11,'male',2,'rabbit-about.png','REHOME'),(3,'','Gerald',8,'male',2,'LoginRabbit.jpg',NULL),(5,'','Nomi',6,'female',3,'rabbit-about.png',NULL),(6,'','Snow',9,'female',1,'1234.png',NULL),(7,'','Harold',8,'male',2,NULL,NULL),(8,'','Jacob',5,'male',1,NULL,NULL),(67,'','Mikey',14,'female',4,NULL,NULL);
+INSERT INTO `rabbit` VALUES (1,'','Totoro',2,'female',4,'./rabbit-contact.png','REHOME'),(2,'','Loki',11,'male',2,'rabbit-about.png','REHOME'),(3,'','Gerald',8,'male',2,'LoginRabbit.jpg','REHOME'),(5,'','Nomi',6,'female',3,'rabbit-about.png',NULL),(6,'','Snow',9,'female',1,'1234.png',NULL),(7,'','Harold',8,'male',2,NULL,NULL),(8,'','Jacob',5,'male',1,NULL,NULL),(67,'','Mikey',14,'female',4,NULL,NULL);
 /*!40000 ALTER TABLE `rabbit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-18  0:14:23
+-- Dump completed on 2023-10-18  8:17:51

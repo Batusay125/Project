@@ -10,13 +10,26 @@ import Header from "../Components/Header.jsx";
 import appConfig from "../../config.json";
 const BASE_URL = appConfig.apiBasePath; //e.g "http://localhost:8080/api"
 
+
+
 function AddRabbit() {
   const navigate = useNavigate();
+
+  const [file, setFile] = useState();
+  const [img, setImg] = useState();
+  
+  const onFileChange = e => {
+    console.log(e.target.files[0]);
+    setImg(e.target.files[0]);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  };
+  
+
   const [values, setValues] = useState({
     name: "",
     age: "",
     sex: "",
-    weight: "",
+    weight: ""
   });
 
   const handleInput = (e) => {
@@ -25,8 +38,14 @@ function AddRabbit() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('image', img);
+    const postData = JSON.stringify(values);
+    formData.append('values', postData);
+
     axios
-      .post(BASE_URL + "/add-rabbit", values)
+      .post(BASE_URL + "/add-rabbit", formData)
       .then((res) => {
         toast.success("Successfully added!");
         navigate("/rabbitlist");
@@ -41,7 +60,18 @@ function AddRabbit() {
         <Header />
         <br />
         <h1>Add Rabbit</h1>
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit} encType="multipart/form-data">
+        <label htmlFor="">Image :</label>
+          <input
+            type="file"
+            name="image"
+            className="form-control"
+            id="image"
+            onChange={onFileChange} />
+          <br />
+          <img src={file} />
+          <br />
+          
           <label htmlFor="">Name :</label>
           <input
             type="text"
@@ -83,6 +113,8 @@ function AddRabbit() {
             required
           />
           <br />
+          
+
           <div className="actions">
             <Link to="/rabbitlist" className="secondary text-decoration-none">
               Back
